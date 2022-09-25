@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/primary"
+    tools:context=".WelcomeActivity">
+
+    <View
+        android:id="@+id/viewRound1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/round_design_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <View
+        android:id="@+id/viewRound2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/round_design_shape"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <View
+        android:id="@+id/viewRound3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/round_design_shape"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginStart="@dimen/_50sdp"
+        />
+
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="@dimen/_20sdp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/appTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/appDescription"
+            android:text="@string/diu_question_bank"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_25sdp"
+            android:padding="@dimen/_5sdp"
+            />
+
+        <TextView
+            android:id="@+id/appDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/constraintLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="#A8FFFFFF"
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:text="@string/app_intro"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonLogIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in"
+            android:background="@drawable/background_login_signup_color_white"
+            android:textColor="@color/primary"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:textStyle="bold"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up"
+            android:background="@drawable/background_signup_login_white"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textStyle="bold"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
