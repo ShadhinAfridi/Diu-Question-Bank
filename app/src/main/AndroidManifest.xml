@@ -27,49 +27,63 @@
         android:theme="@style/Theme.DIUQuestionBank">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-1810198229581125~5935581013"/>
+            android:value="ca-app-pub-2590640247128409~2390304821"/>
 
         <activity
             android:name=".RewardActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".NoticeViewActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".NoticeActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".HelpActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".ProfileActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".authentication.ResetPasswordActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".authentication.LoginActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".authentication.SignupActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".PdfViewerActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".DepartmentActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".CoursesActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".QuestionUploadActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".WelcomeActivity"
+            android:screenOrientation="locked"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
