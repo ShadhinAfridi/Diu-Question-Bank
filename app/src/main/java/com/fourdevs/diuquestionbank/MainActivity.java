@@ -111,8 +111,9 @@ public class MainActivity extends BaseActivity {
         });
 
         binding.cardReward.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, RewardActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(MainActivity.this, RewardActivity.class);
+            //startActivity(intent);
+            Toast.makeText(this, "Coming Soon....", Toast.LENGTH_SHORT).show();
         });
         binding.cardHelp.setOnClickListener(view -> {
             Intent helpIntent = new Intent(MainActivity.this, HelpActivity.class);

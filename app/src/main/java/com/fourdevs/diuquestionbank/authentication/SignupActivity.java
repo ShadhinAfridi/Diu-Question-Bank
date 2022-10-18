@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fourdevs.diuquestionbank.PrivacyPolicyActivity;
 import com.fourdevs.diuquestionbank.WelcomeActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivitySignupBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
@@ -67,6 +68,10 @@ public class SignupActivity extends AppCompatActivity {
         binding.imageConfirmPasswordInvisible.setOnClickListener(view -> showPassword());
         binding.imagePasswordVisible.setOnClickListener(view -> hidePassword());
         binding.imageConfirmPasswordVisible.setOnClickListener(view -> hidePassword());
+        binding.termsAndPrivacy.setOnClickListener(view -> {
+            Intent intent = new Intent(SignupActivity.this, PrivacyPolicyActivity.class);
+            startActivity(intent);
+        });
 
     }
 

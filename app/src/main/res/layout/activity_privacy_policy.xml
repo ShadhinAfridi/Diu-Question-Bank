@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RewardActivity">
+    tools:context=".PrivacyPolicyActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
@@ -31,8 +31,9 @@
             />
 
 
+
         <TextView
-            android:id="@+id/textCourseName"
+            android:id="@+id/titlePrivacy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
@@ -42,24 +43,27 @@
             android:maxLines="1"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
+            android:padding="@dimen/_5sdp"
             android:textStyle="bold"
+            android:text="@string/privacy_policy"
             app:layout_constraintBottom_toBottomOf="@id/iconBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iconBack"
-            app:layout_constraintTop_toTopOf="@id/iconBack" />
+            app:layout_constraintTop_toTopOf="@id/iconBack"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/show_video_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+    <WebView
+        android:id="@+id/web"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/constraintLayout1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/watch_video_button_text" />
-
-
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
