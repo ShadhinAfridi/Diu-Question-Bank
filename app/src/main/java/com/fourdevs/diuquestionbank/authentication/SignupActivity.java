@@ -2,14 +2,12 @@ package com.fourdevs.diuquestionbank.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.fourdevs.diuquestionbank.PrivacyPolicyActivity;
 import com.fourdevs.diuquestionbank.WelcomeActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivitySignupBinding;
@@ -18,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -183,29 +180,25 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void showPassword() {
-        binding.inputUserPassword.setInputType(InputType.TYPE_CLASS_TEXT);
-        binding.inputUserPassword.setTransformationMethod(null);
-        binding.inputUserConfirmPassword.setInputType(InputType.TYPE_CLASS_TEXT);
-        binding.inputUserConfirmPassword.setTransformationMethod(null);
+        binding.inputUserPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        binding.inputUserConfirmPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
         binding.imagePasswordInvisible.setVisibility(View.INVISIBLE);
         binding.imagePasswordVisible.setVisibility(View.VISIBLE);
         binding.imageConfirmPasswordInvisible.setVisibility(View.INVISIBLE);
         binding.imageConfirmPasswordVisible.setVisibility(View.VISIBLE);
-        binding.inputUserPassword.setSelection(Objects.requireNonNull(binding.inputUserPassword.getText()).length());
-        binding.inputUserConfirmPassword.setSelection(Objects.requireNonNull(binding.inputUserPassword.getText()).length());
+        binding.inputUserPassword.setSelection(binding.inputUserPassword.getText().length());
+        binding.inputUserConfirmPassword.setSelection(binding.inputUserConfirmPassword.getText().length());
     }
 
     private void hidePassword() {
-        binding.inputUserPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         binding.inputUserPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        binding.inputUserConfirmPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         binding.inputUserConfirmPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
         binding.imagePasswordVisible.setVisibility(View.INVISIBLE);
         binding.imagePasswordInvisible.setVisibility(View.VISIBLE);
         binding.imageConfirmPasswordVisible.setVisibility(View.INVISIBLE);
         binding.imageConfirmPasswordInvisible.setVisibility(View.VISIBLE);
-        binding.inputUserPassword.setSelection(Objects.requireNonNull(binding.inputUserPassword.getText()).length());
-        binding.inputUserConfirmPassword.setSelection(Objects.requireNonNull(binding.inputUserPassword.getText()).length());
+        binding.inputUserPassword.setSelection(binding.inputUserPassword.getText().length());
+        binding.inputUserConfirmPassword.setSelection(binding.inputUserConfirmPassword.getText().length());
     }
 
 

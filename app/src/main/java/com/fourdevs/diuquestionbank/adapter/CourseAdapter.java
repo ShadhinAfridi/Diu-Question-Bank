@@ -78,14 +78,15 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             binding.semesterName.setText(course.semester+"("+course.year+")");
             binding.examName.setText(course.exam);
             binding.iconDownload.setOnClickListener(view -> {
-                if (checkPermissions()) {
-                    binding.iconDownload.setVisibility(View.INVISIBLE);
-                    binding.progressBar.setVisibility(View.VISIBLE);
-                    downloadActivity(course.fileUrl);
-                    resetColor();
-                } else {
-                    makeToast("Storage permission denied");
-                }
+                makeToast("Download unavailable.");
+//                if (checkPermissions()) {
+//                    binding.iconDownload.setVisibility(View.INVISIBLE);
+//                    binding.progressBar.setVisibility(View.VISIBLE);
+//                    downloadActivity(course.fileUrl);
+//                    resetColor();
+//                } else {
+//                    makeToast("Storage permission denied");
+//                }
             });
             binding.iconEye.setOnClickListener(view -> {
                 goToPdfViewer(course.courseName, course.fileUrl, course.semester, course.year);

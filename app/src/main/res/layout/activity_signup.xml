@@ -105,6 +105,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/imageName"
                 android:hint="@string/name"
                 style="@style/EditTextStyle"
+                android:maxLength="25"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -162,6 +163,7 @@
                 app:layout_constraintEnd_toStartOf="@id/imageEmailCheck"
                 android:hint="@string/email"
                 style="@style/EditTextStyle"
+                android:maxLength="30"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -211,6 +213,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/inputUserPassword"
                 android:inputType="textPassword"
+                android:maxLength="15"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -289,6 +292,7 @@
                 app:layout_constraintEnd_toStartOf="@id/imageConfirmPasswordVisible"
                 android:hint="@string/confirm_password"
                 style="@style/EditTextStyle"
+                android:maxLength="15"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
