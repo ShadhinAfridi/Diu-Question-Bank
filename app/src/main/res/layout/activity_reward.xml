@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
+            android:text="@string/reward"
             android:ellipsize="end"
             android:gravity="start"
             android:maxLines="1"

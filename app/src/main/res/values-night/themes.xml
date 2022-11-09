@@ -11,12 +11,66 @@
         <item name="colorSecondary">@color/primary</item>
         <item name="colorSecondaryVariant">@color/primary</item>
         <item name="colorOnSecondary">@color/black</item>
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
 
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="EditTextStyle" parent="Theme.DIUQuestionBank">
+        <item name="android:background">@color/lite_black</item>
+        <item name="android:backgroundTint">@color/lite_black</item>
+        <item name="android:paddingTop">@dimen/_5sdp</item>
+        <item name="android:paddingBottom">@dimen/_8sdp</item>
+        <item name="android:paddingStart">@dimen/_5sdp</item>
+        <item name="android:paddingEnd">@dimen/_5sdp</item>
+        <item name="android:textColorHint">@color/lite_text</item>
+        <item name="android:layout_marginStart">@dimen/_5sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_5sdp</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+    </style>
+
+    <style name="textColorPrimary"  parent="Theme.DIUQuestionBank">
+        <item name="android:textColor">@color/lite_white</item>
+    </style>
+
+    <style name="textColorPrimaryBlack"  parent="Theme.DIUQuestionBank">
+        <item name="android:textColor">@color/lite_white</item>
+    </style>
+
+    <style name="primaryColorButton" parent="Theme.DIUQuestionBank">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/background_login_signup_color</item>
+    </style>
+
+    <style name="noColorButtonHome" parent="Theme.DIUQuestionBank">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/background_signup_login_white</item>
+    </style>
+
+    <style name="whiteColorButtonHome" parent="Theme.DIUQuestionBank">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:background">@drawable/background_login_signup_color_white</item>
+    </style>
+
+    <style name="BackGroundUpload" parent="Theme.DIUQuestionBank">
+        <item name="android:background">@drawable/background_upload_layout_dark</item>
+    </style>
+
+    <style name="BackgroundUploadInput" parent="Theme.DIUQuestionBank">
+        <item name="android:background">@color/input_background_dark</item>
+    </style>
+
+    <style name="BackgroundList" parent="Theme.DIUQuestionBank">
+        <item name="android:background">@color/input_background_dark</item>
+    </style>
+
+    <style name="ProfileEditRoundBg" parent="Theme.DIUQuestionBank">
+        <item name="android:background">@drawable/background_round_and_black</item>
+    </style>
+
+
 
 </resources>

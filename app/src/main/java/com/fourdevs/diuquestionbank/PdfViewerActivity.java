@@ -5,15 +5,19 @@ import android.graphics.Bitmap;
 import android.graphics.pdf.PdfRenderer;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.fourdevs.diuquestionbank.adapter.PdfAdapter;
 import com.fourdevs.diuquestionbank.databinding.ActivityPdfViewerBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -29,12 +33,14 @@ public class PdfViewerActivity extends BaseActivity {
     private String courseLink;
     private ParcelFileDescriptor fileDescriptor;
     private PdfRenderer pdfRenderer;
+    private DisplayMetrics metrics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPdfViewerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        metrics = getApplicationContext().getResources().getDisplayMetrics();
         loading(true);
         Intent intent = getIntent();
         String courseName = intent.getStringExtra(Constants.KEY_NAME);
@@ -42,6 +48,19 @@ public class PdfViewerActivity extends BaseActivity {
         binding.textCourseName.setText(courseName);
         downloadActivity();
         setListener();
+        setAds();
+    }
+
+    private void setAds() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
+        binding.adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(@NonNull com.google.android.gms.ads.LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+                Log.d("DIU Ad Error", loadAdError.getMessage());
+            }
+        });
     }
 
     private void setListener() {
@@ -88,11 +107,11 @@ public class PdfViewerActivity extends BaseActivity {
 
         for(int i=0; i<numberOfPage; i++){
             PdfRenderer.Page rendererPage = pdfRenderer.openPage(i);
-            int rendererPageWidth = rendererPage.getWidth()*2;
-            int rendererPageHeight = rendererPage.getHeight()*2;
+            //int rendererPageWidth = rendererPage.getWidth()*2;
+            //int rendererPageHeight = rendererPage.getHeight()*2;
             Bitmap bitmap = Bitmap.createBitmap(
-                    rendererPageWidth,
-                    rendererPageHeight,
+                    metrics.widthPixels,
+                    metrics.heightPixels,
                     Bitmap.Config.ARGB_8888);
             rendererPage.render(bitmap, null, null,
                     PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);

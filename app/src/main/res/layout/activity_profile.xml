@@ -87,7 +87,7 @@
                 android:layout_height="@dimen/_24sdp"
                 app:layout_constraintBottom_toBottomOf="@id/profileImage"
                 app:layout_constraintEnd_toEndOf="@id/profileImage"
-                android:background="@drawable/background_round_and_white"
+                style="@style/ProfileEditRoundBg"
                 android:padding="@dimen/_3sdp"
                 >
                 <com.google.android.material.imageview.ShapeableImageView
@@ -96,6 +96,7 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_pen"
+                    android:tint="@color/secondary_text"
                     />
 
             </FrameLayout>
@@ -113,9 +114,8 @@
                 android:paddingEnd="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textSize="@dimen/_14sdp"
-                android:textColor="@color/primary_text"
+                style="@style/textColorPrimaryBlack"
                 android:textStyle="bold"
-                android:background="@color/white"
                 android:enabled="false"
                 />
 
@@ -130,7 +130,6 @@
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/secondary_text"
                 android:textStyle="bold"
-                android:background="@color/white"
                 android:enabled="false"
                 />
 
@@ -160,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/primary_text"
+                        style="@style/textColorPrimaryBlack"
                         android:layout_marginBottom="@dimen/_5sdp"
                         />
                     <TextView
@@ -191,7 +190,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/primary_text"
+                        style="@style/textColorPrimaryBlack"
                         android:layout_marginBottom="@dimen/_5sdp"
                         />
                     <TextView
@@ -222,7 +221,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/primary_text"
+                        style="@style/textColorPrimaryBlack"
                         android:layout_marginBottom="@dimen/_5sdp"
                         />
                     <TextView

@@ -70,7 +70,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/constraintLayout2"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="#A8FFFFFF"
+            android:textColor="@color/lite_white"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_5sdp"
@@ -83,14 +83,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/log_in"
-            android:background="@drawable/background_login_signup_color_white"
-            android:textColor="@color/primary"
             android:textAllCaps="false"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:textStyle="bold"
+            style="@style/whiteColorButtonHome"
             />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -98,14 +97,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sign_up"
-            android:background="@drawable/background_signup_login_white"
             android:textAllCaps="false"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_30sdp"
-            android:textColor="@color/white"
             android:layout_marginTop="@dimen/_10sdp"
             android:textStyle="bold"
+            style="@style/noColorButtonHome"
             />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

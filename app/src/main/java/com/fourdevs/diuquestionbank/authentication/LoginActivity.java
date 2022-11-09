@@ -77,7 +77,9 @@ public class LoginActivity extends AppCompatActivity {
             binding.inputUserPassword.setSelection(Objects.requireNonNull(binding.inputUserPassword.getText()).length());
         });
 
-        binding.textResetPassword.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ResetPasswordActivity.class)));
+        binding.textResetPassword.setOnClickListener(view ->
+                startActivity(new Intent(getApplicationContext(), ResetPasswordActivity.class))
+        );
 
 
     }

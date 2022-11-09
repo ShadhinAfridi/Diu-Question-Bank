@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="@dimen/_5sdp"
+    style="@style/BackgroundList"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="horizontal"
@@ -38,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAlignment="viewStart"
-            android:textColor="@color/primary_text"
+            style="@style/textColorPrimaryBlack"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toEndOf="@+id/imageBook"
             app:layout_constraintTop_toTopOf="parent"

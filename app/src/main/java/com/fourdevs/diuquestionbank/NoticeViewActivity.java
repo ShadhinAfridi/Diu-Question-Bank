@@ -32,10 +32,8 @@ public class NoticeViewActivity extends AppCompatActivity {
             onBackPressed();
             finish();
         });
-        binding.link.setOnClickListener(view -> {
-            startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse(link)));
-        });
+        binding.link.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW,
+                Uri.parse(link))));
     }
 
     private void getIntentExtra() {

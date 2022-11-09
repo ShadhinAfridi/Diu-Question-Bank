@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome \nBack"
+            android:text="@string/welcome_back"
             android:textColor="@color/white"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,224 +71,195 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:padding="@dimen/_10sdp"
         android:orientation="vertical"
-        >
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            >
+            android:padding="@dimen/_5sdp">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageEmail"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@drawable/ic_mail"
                 android:padding="@dimen/_3sdp"
+                android:src="@drawable/ic_mail"
                 android:tint="@color/lite_text"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/inputUserEmail"
+                style="@style/EditTextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imageEmail"
-                app:layout_constraintEnd_toStartOf="@id/imageEmailCheck"
                 android:hint="@string/email"
-                android:textSize="@dimen/_12sdp"
-                android:background="@color/white"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:textColorHint="@color/lite_text"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                />
+                android:inputType="textEmailAddress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imageEmailCheck"
+                app:layout_constraintStart_toEndOf="@id/imageEmail"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageEmailCheck"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@drawable/ic_done"
                 android:padding="@dimen/_3sdp"
+                android:src="@drawable/ic_done"
                 android:tint="@color/lite_text"
                 android:visibility="invisible"
-                app:tint="@color/primary"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/primary" />
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="2dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@color/lite_line"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                />
+                android:background="@color/lite_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            >
+            android:padding="@dimen/_5sdp">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imagePassword"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@drawable/ic_lock"
                 android:padding="@dimen/_3sdp"
+                android:src="@drawable/ic_lock"
                 android:tint="@color/lite_text"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/inputUserPassword"
-                android:inputType="textPassword"
+                style="@style/EditTextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imagePassword"
-                app:layout_constraintEnd_toStartOf="@id/imagePasswordVisible"
                 android:hint="@string/password"
+                android:inputType="textPassword"
                 android:textSize="@dimen/_12sdp"
-                android:background="@color/white"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:textColorHint="@color/lite_text"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imagePasswordVisible"
+                app:layout_constraintStart_toEndOf="@id/imagePassword"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imagePasswordVisible"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@drawable/ic_visibility"
                 android:padding="@dimen/_3sdp"
+                android:src="@drawable/ic_visibility"
                 android:tint="@color/primary"
                 android:visibility="invisible"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imagePasswordInvisible"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@drawable/ic_visibility_off"
                 android:padding="@dimen/_3sdp"
+                android:src="@drawable/ic_visibility_off"
                 android:tint="@color/lite_text"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="2dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@color/lite_line"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                />
+                android:background="@color/lite_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textResetPassword"
+            style="@style/textColorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgotten password?"
-            android:textColor="@color/primary"
             android:layout_gravity="end"
-            android:textSize="@dimen/_12sdp"
-            android:background="@color/white"
-            android:textColorHint="@color/lite_text"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:paddingEnd="@dimen/_5sdp"
-            />
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="@string/forgotten_password"
+            android:textSize="@dimen/_12sdp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonLogIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Log in"
-            android:background="@drawable/background_login_signup_color"
-            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/log_in"
             android:textAllCaps="false"
             android:textSize="@dimen/_12sdp"
-            android:padding="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            style="@style/primaryColorButton"
             />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_5sdp"
-            >
+            android:layout_marginBottom="@dimen/_5sdp">
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textOr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:text="@string/or"
                 android:padding="@dimen/_5sdp"
-                />
+                android:text="@string/or"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <View
                 android:id="@+id/viewLine1"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/textOr"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:background="#5C757575"
                 android:padding="@dimen/_5sdp"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textOr"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/viewLine2"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                app:layout_constraintStart_toEndOf="@id/textOr"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:background="#5C757575"
                 android:padding="@dimen/_5sdp"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textOr"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -296,14 +267,13 @@
             android:id="@+id/buttonSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up"
-            android:background="@drawable/background_signup_login_black"
-            android:textAllCaps="false"
-            android:textSize="@dimen/_12sdp"
-            android:padding="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/background_signup_login_black"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
             android:textColor="@color/lite_text"
-            />
+            android:textSize="@dimen/_12sdp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

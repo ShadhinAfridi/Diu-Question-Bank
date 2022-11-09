@@ -22,6 +22,7 @@ import com.fourdevs.diuquestionbank.R;
 import com.fourdevs.diuquestionbank.databinding.ItemContainerCoursesBinding;
 import com.fourdevs.diuquestionbank.listeners.CourseListener;
 import com.fourdevs.diuquestionbank.models.Course;
+import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -98,8 +99,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
         private void goToPdfViewer(String courseName, String fileUrl, String semester, String year) {
             Intent intent = new Intent(context, PdfViewerActivity.class);
-            intent.putExtra("courseName", courseName+" "+semester+"("+year+")");
-            intent.putExtra("courseLink", fileUrl);
+            intent.putExtra(Constants.KEY_NAME, courseName+" "+semester+"("+year+")");
+            intent.putExtra(Constants.KEY_PDF_URL, fileUrl);
             context.startActivity(intent);
         }
 
@@ -125,12 +126,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                 islandRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        binding.iconDownload.setVisibility(View.VISIBLE);
-                        binding.progressBar.setVisibility(View.INVISIBLE);
                         makeToast("Download Complete!");
                     }
                 }).addOnFailureListener(exception -> makeToast("Download Failed!"));
             }
+            binding.iconDownload.setVisibility(View.VISIBLE);
+            binding.progressBar.setVisibility(View.INVISIBLE);
         }
 
     }

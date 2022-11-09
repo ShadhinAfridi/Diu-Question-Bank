@@ -49,10 +49,11 @@ public class RewardActivity extends Activity {
         });
 
         loadRewardedAd();
-
-
-
         binding.showVideoButton.setOnClickListener(view -> showRewardedVideo());
+        binding.iconBack.setOnClickListener(view -> {
+            onBackPressed();
+            finish();
+        });
 
 
     }

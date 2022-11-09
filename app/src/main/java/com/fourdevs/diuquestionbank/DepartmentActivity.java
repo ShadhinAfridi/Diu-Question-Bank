@@ -3,12 +3,14 @@ package com.fourdevs.diuquestionbank;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import com.fourdevs.diuquestionbank.adapter.DepartmentAdapter;
 import com.fourdevs.diuquestionbank.databinding.ActivityDepartmentBinding;
 import com.fourdevs.diuquestionbank.listeners.DepartmentListener;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -34,6 +36,7 @@ public class DepartmentActivity extends BaseActivity implements DepartmentListen
     private void getDepartments() {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_QUESTIONS)
+                .whereEqualTo(Constants.KEY_IS_APPROVED, true)
                 .get()
                 .addOnCompleteListener(task -> {
                     List <String> departments = new ArrayList<>();
@@ -58,7 +61,6 @@ public class DepartmentActivity extends BaseActivity implements DepartmentListen
                     binding.departmentProgressBar.setVisibility(View.GONE);
                 });
     }
-
 
     @Override
     public void onDepartmentClicked(String department) {

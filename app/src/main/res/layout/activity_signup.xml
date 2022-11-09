@@ -104,15 +104,7 @@
                 app:layout_constraintEnd_toStartOf="@id/imageNameCheck"
                 app:layout_constraintBottom_toBottomOf="@id/imageName"
                 android:hint="@string/name"
-                android:textSize="@dimen/_12sdp"
-                android:background="@color/white"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:textColorHint="@color/lite_text"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
+                style="@style/EditTextStyle"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -169,15 +161,7 @@
                 app:layout_constraintStart_toEndOf="@id/imageEmail"
                 app:layout_constraintEnd_toStartOf="@id/imageEmailCheck"
                 android:hint="@string/email"
-                android:textSize="@dimen/_12sdp"
-                android:background="@color/white"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:textColorHint="@color/lite_text"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
+                style="@style/EditTextStyle"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -234,15 +218,7 @@
                 app:layout_constraintStart_toEndOf="@id/imagePassword"
                 app:layout_constraintEnd_toStartOf="@id/imagePasswordVisible"
                 android:hint="@string/password"
-                android:textSize="@dimen/_12sdp"
-                android:background="@color/white"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:textColorHint="@color/lite_text"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
+                style="@style/EditTextStyle"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -312,15 +288,7 @@
                 app:layout_constraintStart_toEndOf="@id/imageConfirmPassword"
                 app:layout_constraintEnd_toStartOf="@id/imageConfirmPasswordVisible"
                 android:hint="@string/confirm_password"
-                android:textSize="@dimen/_12sdp"
-                android:background="@color/white"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:textColorHint="@color/lite_text"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
+                style="@style/EditTextStyle"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -368,12 +336,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sign_up"
-            android:background="@drawable/background_login_signup_color"
-            android:textColor="@color/white"
             android:textAllCaps="false"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            style="@style/primaryColorButton"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -390,7 +357,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="By signing up, you agree to our"
+                android:text="@string/by_signing_up_you_agree_to_our"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/secondary_text"
                 />
@@ -401,7 +368,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/userAgreement"
-                android:text="Terms &amp; Privacy Policy"
+                android:text="@string/terms_privacy_policy"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/secondary_text"
                 android:textStyle="bold"

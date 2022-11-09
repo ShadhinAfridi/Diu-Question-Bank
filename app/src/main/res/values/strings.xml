@@ -70,14 +70,14 @@
     <string name="create_n_account">Create \nAccount</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="log_in">Log in</string>
-    <string name="app_intro">All the exam questions of Daffodil International University will be found here.</string>
-    <string name="diu_question_bank">DIU question bank</string>
+    <string name="app_intro">A collection of all the department\'s previous exam questions for DIU students.</string>
+    <string name="diu_question_bank">DIU Question Bank</string>
     <string name="department_of">Department of</string>
     <string name="reward">Reward</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="impossible_game">Impossible Game</string>
-    <string name="retry_button_text">Retry</string>
-    <string name="watch_video_button_text">Watch Video for 10 additional coins</string>
-    <string name="default_coin_text">Coins: 0</string>
+    <string name="watch_video_button_text">Ads</string>
+    <string name="forgotten_password">Forgotten password?</string>
+    <string name="by_signing_up_you_agree_to_our">By signing up, you agree to our</string>
+    <string name="terms_privacy_policy"><![CDATA[Terms & Privacy Policy]]></string>
+    <string name="welcome_back">Welcome \nBack</string>
 </resources>

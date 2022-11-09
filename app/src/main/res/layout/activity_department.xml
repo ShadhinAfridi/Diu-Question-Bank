@@ -31,20 +31,6 @@
             app:tint="@color/white"
             />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iconSearch"
-            android:layout_width="@dimen/_26sdp"
-            android:layout_height="@dimen/_26sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginTop="2dp"
-            android:padding="@dimen/_3sdp"
-            android:src="@drawable/ic_search"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:tint="@color/white"
-            />
-
         <TextView
             android:id="@+id/titleDepartment"
             android:layout_width="0dp"
@@ -59,9 +45,24 @@
             android:textStyle="bold"
             android:text="@string/department"
             app:layout_constraintBottom_toBottomOf="@id/iconBack"
-            app:layout_constraintEnd_toStartOf="@id/iconSearch"
+            app:layout_constraintEnd_toStartOf="@id/iconInfo"
             app:layout_constraintStart_toEndOf="@id/iconBack"
             app:layout_constraintTop_toTopOf="@id/iconBack"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iconInfo"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginTop="2dp"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:tint="@color/white"
+            android:visibility="invisible"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

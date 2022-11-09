@@ -88,10 +88,6 @@ public class SignupActivity extends AppCompatActivity {
             binding.inputUserEmail.setError("Invalid email address!");
             binding.inputUserEmail.requestFocus();
             return false;
-        } else if (!email.matches("[a-zA-Z0-9._-]+@diu.edu.bd+")) {
-            binding.inputUserEmail.setError("DIU email address only!");
-            binding.inputUserEmail.requestFocus();
-            return false;
         } else if (password.isEmpty()) {
             binding.inputUserPassword.setError("This field is required");
             binding.inputUserPassword.requestFocus();
