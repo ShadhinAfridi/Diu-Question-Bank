@@ -49,7 +49,6 @@ public class MainActivity extends BaseActivity {
         if(!checkPermissions()) {
             askPermission();
         }
-        viewModel.getToken();
         setUserData();
         setListeners();
         setAds();

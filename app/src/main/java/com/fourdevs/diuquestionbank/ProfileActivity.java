@@ -11,19 +11,16 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.widget.Toast;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.content.ContextCompat;
-
 import com.fourdevs.diuquestionbank.databinding.ActivityProfileBinding;
-import com.fourdevs.diuquestionbank.models.Course;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -34,7 +31,8 @@ public class ProfileActivity extends BaseActivity {
     private ActivityProfileBinding binding;
     private PreferenceManager preferenceManager;
     private FirebaseFirestore database;
-    private int totalUpload, totalApproved;
+    private String uploadCount, approveCount, rejectCount;
+    private Integer pendingCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +46,8 @@ public class ProfileActivity extends BaseActivity {
         binding.titleProfile.setText(preferenceManager.getString(Constants.KEY_NAME));
         binding.userEmail.setText(preferenceManager.getString(Constants.KEY_EMAIL));
 
-        if(!preferenceManager.getBoolean(Constants.KEY_COUNT_ONCE)){
-            getApprovedCount();
-            getUploadCount();
-            getRejectedData();
-        } else {
-            binding.uploadCount.setText(preferenceManager.getString(Constants.KEY_COUNT_UPLOAD));
-            binding.approvedCount.setText(preferenceManager.getString(Constants.KEY_COUNT_APPROVED));
-            binding.rejectedCount.setText(preferenceManager.getString(Constants.KEY_COUNT_REJECTED));
-        }
+        getCount();
+
         if(preferenceManager.getString(Constants.KEY_PROFILE_PICTURE) != null) {
             binding.profileImage.setImageBitmap(getBitmapFromEncodedString(preferenceManager.getString(Constants.KEY_PROFILE_PICTURE)));
         }
@@ -136,62 +127,24 @@ public class ProfileActivity extends BaseActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void getApprovedCount() {
-        database.collection(Constants.KEY_COLLECTION_QUESTIONS)
-                .whereEqualTo(Constants.KEY_USER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
-                .whereEqualTo(Constants.KEY_IS_APPROVED, true)
-                .get()
-                .addOnCompleteListener(task -> {
-                    List<Course> courses = new ArrayList<>();
-                    for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                        Course course = new Course();
-                        course.departmentName = queryDocumentSnapshot.getString(Constants.KEY_DEPARTMENT);
-                        course.courseName = queryDocumentSnapshot.getString(Constants.KEY_COURSE_CODE);
-                        course.semester = queryDocumentSnapshot.getString(Constants.KEY_SEMESTER);
-                        course.year = queryDocumentSnapshot.getString(Constants.KEY_YEAR);
-                        course.fileUrl = queryDocumentSnapshot.getString(Constants.KEY_PDF_URL);
-                        course.exam = queryDocumentSnapshot.getString(Constants.KEY_EXAM);
-                        courses.add(course);
-                    }
-                    totalApproved = courses.size();
-                    preferenceManager.putSting(Constants.KEY_COUNT_APPROVED, courses.size()+"");
-                    binding.approvedCount.setText(courses.size()+"");
-                });
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void getUploadCount() {
-        database.collection(Constants.KEY_COLLECTION_QUESTIONS)
+    private void getCount() {
+        database.collection(Constants.KEY_COLLECTION_USERS)
                 .whereEqualTo(Constants.KEY_USER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
                 .get()
                 .addOnCompleteListener(task -> {
-                    List<Course> courseTotal = new ArrayList<>();
-                    for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                        Course course = new Course();
-                        course.departmentName = queryDocumentSnapshot.getString(Constants.KEY_DEPARTMENT);
-                        course.courseName = queryDocumentSnapshot.getString(Constants.KEY_COURSE_CODE);
-                        course.semester = queryDocumentSnapshot.getString(Constants.KEY_SEMESTER);
-                        course.year = queryDocumentSnapshot.getString(Constants.KEY_YEAR);
-                        course.fileUrl = queryDocumentSnapshot.getString(Constants.KEY_PDF_URL);
-                        course.exam = queryDocumentSnapshot.getString(Constants.KEY_EXAM);
-                        courseTotal.add(course);
+                    if(task.isSuccessful() && task.getResult() != null
+                            && task.getResult().getDocuments().size() > 0){
+                        DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+                        uploadCount = documentSnapshot.getString(Constants.KEY_UPLOAD_COUNT);
+                        approveCount = documentSnapshot.getString(Constants.KEY_APPROVE_COUNT);
+                        rejectCount = documentSnapshot.getString(Constants.KEY_REJECT_COUNT);
                     }
-                    totalUpload = courseTotal.size();
-                    preferenceManager.putSting(Constants.KEY_COUNT_UPLOAD, courseTotal.size()+"");
-                    binding.uploadCount.setText(courseTotal.size()+"");
-
+                    pendingCount = Integer.parseInt(uploadCount) - Integer.parseInt(rejectCount) - Integer.parseInt(approveCount);
+                    binding.uploadCount.setText(uploadCount);
+                    binding.approvedCount.setText(approveCount);
+                    binding.rejectedCount.setText(pendingCount.toString());
                 });
-
     }
-
-    @SuppressLint("SetTextI18n")
-    private void getRejectedData() {
-        int totalRejected = totalUpload-totalApproved;
-        preferenceManager.putSting(Constants.KEY_COUNT_REJECTED, totalRejected+"");
-        preferenceManager.putBoolean(Constants.KEY_COUNT_ONCE, true);
-        binding.rejectedCount.setText(totalRejected+"");
-    }
-
 
 
     private Boolean checkPermissions(){

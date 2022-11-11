@@ -141,10 +141,13 @@ public class SignupActivity extends AppCompatActivity {
         user.put(Constants.KEY_IS_ADMIN, false);
         user.put(Constants.KEY_PROFILE_PICTURE, null);
         user.put(Constants.KEY_IS_VERIFIED, false);
+        user.put(Constants.KEY_UPLOAD_COUNT, 0);
+        user.put(Constants.KEY_APPROVE_COUNT, 0);
+        user.put(Constants.KEY_REJECT_COUNT, 0);
         database.collection(Constants.KEY_COLLECTION_USERS).document(userId).set(user)
                 .addOnSuccessListener(documentReference -> {
                     sendVerificationEmail();
-                    makeToast("We've sent a verification email. Please verify your account and Login");
+                    makeToast("We've sent a verification email to "+email+". Please verify your email and Login");
                 })
                 .addOnFailureListener(exception ->{
                     loading(false);

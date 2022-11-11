@@ -38,4 +38,9 @@ public class Constants {
     //notification
     public static final String KEY_COLLECTION_NOTIFICATIONS = "notifications";
 
+    //counts
+    public static final String KEY_UPLOAD_COUNT = "upload_count";
+    public static final String KEY_APPROVE_COUNT = "approve_count";
+    public static final String KEY_REJECT_COUNT = "reject_count";
+
 }

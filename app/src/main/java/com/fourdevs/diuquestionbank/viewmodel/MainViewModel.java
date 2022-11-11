@@ -19,10 +19,6 @@ public class MainViewModel extends ViewModel {
         return repository.getUserData();
     }
 
-    public void getToken() {
-        repository.getToken();
-    }
-
     public Task<Void> logOut() {
         return repository.logOut();
     }

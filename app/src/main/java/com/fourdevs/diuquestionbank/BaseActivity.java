@@ -18,12 +18,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 
 public class BaseActivity extends AppCompatActivity {
     private DocumentReference documentReference;
     private PreferenceManager preferenceManager;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +34,15 @@ public class BaseActivity extends AppCompatActivity {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         documentReference = database.collection(Constants.KEY_COLLECTION_USERS)
                 .document(preferenceManager.getString(Constants.KEY_USER_ID));
+        getToken();
+    }
+
+    public void getToken(){
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
+    }
+
+    public void updateToken(String token){
+        documentReference.update(Constants.KEY_FCM_TOKEN, token);
     }
 
     public boolean isInternetAvailable() {
@@ -74,7 +85,7 @@ public class BaseActivity extends AppCompatActivity {
             checkCurrentUser();
             documentReference.update(Constants.KEY_AVAILABILITY, 1);
         } else {
-            Toast.makeText(this, "No internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No internet connection...", Toast.LENGTH_SHORT).show();
         }
     }
 }

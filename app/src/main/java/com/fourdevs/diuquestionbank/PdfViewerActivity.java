@@ -83,7 +83,10 @@ public class PdfViewerActivity extends BaseActivity {
             islandRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                 loading(false);
                 displayPdf(localFile);
-            }).addOnFailureListener(exception -> makeToast("file not created" + exception));
+            }).addOnFailureListener(exception ->{
+                Log.d("file not created", exception.getMessage());
+                makeToast("Cannot open this file");
+            } );
         }
     }
 

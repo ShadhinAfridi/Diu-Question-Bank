@@ -19,19 +19,6 @@ public class MainRepository {
         this.preferenceManager = preferenceManager;
     }
 
-    public void getToken(){
-        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
-    }
-
-    public void updateToken(String token){
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = database
-                .collection(Constants.KEY_COLLECTION_USERS).document(
-                        preferenceManager.getString(Constants.KEY_USER_ID)
-                );
-        documentReference.update(Constants.KEY_FCM_TOKEN, token);
-    }
-
     public Task<QuerySnapshot> getUserData() {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         return database.collection(Constants.KEY_COLLECTION_USERS)
