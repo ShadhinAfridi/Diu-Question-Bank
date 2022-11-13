@@ -51,20 +51,6 @@ public class MainActivity extends BaseActivity {
         }
         setUserData();
         setListeners();
-        setAds();
-        
-    }
-
-    private void setAds() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        binding.adView.loadAd(adRequest);
-        binding.adView.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(@NonNull com.google.android.gms.ads.LoadAdError loadAdError) {
-                super.onAdFailedToLoad(loadAdError);
-                Log.d("DIU Ad Error", loadAdError.getMessage());
-            }
-        });
     }
 
     private void setUserData() {

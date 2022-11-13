@@ -213,7 +213,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/inputUserPassword"
                 android:inputType="textPassword"
-                android:maxLength="15"
+                android:maxLength="20"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -292,7 +292,7 @@
                 app:layout_constraintEnd_toStartOf="@id/imageConfirmPasswordVisible"
                 android:hint="@string/confirm_password"
                 style="@style/EditTextStyle"
-                android:maxLength="15"
+                android:maxLength="20"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView

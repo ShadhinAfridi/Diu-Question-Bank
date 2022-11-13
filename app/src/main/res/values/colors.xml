@@ -15,5 +15,6 @@
     <!--    dark Colours-->
     <color name="upload_bg">#1B1B1B</color>
     <color name="input_background_dark">#242424</color>
+    <color name="green">#5BBD05</color>
 
 </resources>

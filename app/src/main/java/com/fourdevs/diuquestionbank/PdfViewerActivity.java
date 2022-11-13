@@ -48,20 +48,9 @@ public class PdfViewerActivity extends BaseActivity {
         binding.textCourseName.setText(courseName);
         downloadActivity();
         setListener();
-        setAds();
     }
 
-    private void setAds() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        binding.adView.loadAd(adRequest);
-        binding.adView.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(@NonNull com.google.android.gms.ads.LoadAdError loadAdError) {
-                super.onAdFailedToLoad(loadAdError);
-                Log.d("DIU Ad Error", loadAdError.getMessage());
-            }
-        });
-    }
+
 
     private void setListener() {
         binding.iconBack.setOnClickListener(view -> onBackPressed());

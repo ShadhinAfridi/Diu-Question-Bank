@@ -80,4 +80,11 @@
     <string name="by_signing_up_you_agree_to_our">By signing up, you agree to our</string>
     <string name="terms_privacy_policy"><![CDATA[Terms & Privacy Policy]]></string>
     <string name="welcome_back">Welcome \nBack</string>
+    <string name="change_password">Change password</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="change">Change</string>
+    <string name="uploads">Uploads</string>
+    <string name="not_available">Not available...</string>
+    <string name="see_more">See more..</string>
 </resources>

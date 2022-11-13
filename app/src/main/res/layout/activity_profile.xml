@@ -50,197 +50,366 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/constraintLayout2"
+    <ScrollView
+        android:id="@+id/mainScroll"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/constraintLayout1"
-        app:cardUseCompatPadding="true"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:cardElevation="@dimen/_5sdp"
-        android:outlineSpotShadowColor="@color/primary"
-        tools:ignore="UnusedAttribute">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
-            >
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profileImage"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-                android:scaleType="centerCrop"
-                android:background="@drawable/background_image"
-                android:src="@drawable/ic_person"
-                />
-
-            <FrameLayout
-                android:id="@+id/editImage"
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                app:layout_constraintBottom_toBottomOf="@id/profileImage"
-                app:layout_constraintEnd_toEndOf="@id/profileImage"
-                style="@style/ProfileEditRoundBg"
-                android:padding="@dimen/_3sdp"
-                >
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_pen"
-                    android:tint="@color/secondary_text"
-                    />
-
-            </FrameLayout>
-
-
-            <EditText
-                android:id="@+id/userName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profileImage"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_14sdp"
-                style="@style/textColorPrimaryBlack"
-                android:textStyle="bold"
-                android:enabled="false"
-                />
-
-            <EditText
-                android:id="@+id/userEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/userName"
-                android:padding="@dimen/_1sdp"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/secondary_text"
-                android:textStyle="bold"
-                android:enabled="false"
-                />
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="@dimen/_5sdp"
+            android:outlineSpotShadowColor="@color/primary"
+            tools:ignore="UnusedAttribute">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/userEmail"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:padding="@dimen/_10sdp"
                 >
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/background_image"
+                    android:src="@drawable/ic_person"
+                    />
 
-                <LinearLayout
-                    android:id="@+id/linearLayoutUpload"
+                <FrameLayout
+                    android:id="@+id/editImage"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/profileImage"
+                    app:layout_constraintEnd_toEndOf="@id/profileImage"
+                    style="@style/ProfileEditRoundBg"
+                    android:padding="@dimen/_3sdp"
+                    >
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_pen"
+                        android:tint="@color/secondary_text"
+                        />
+
+                </FrameLayout>
+
+
+                <TextView
+                    android:id="@+id/userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/linearLayoutView"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="@dimen/_10sdp"
-                    >
-                    <TextView
-                        android:id="@+id/uploadCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_12sdp"
-                        style="@style/textColorPrimaryBlack"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        />
-                    <TextView
-                        android:id="@+id/textTitleUpload"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/uploadCount"
-                        android:text="@string/upload"
-                        android:textSize="@dimen/_10sdp"
-                        android:textColor="@color/secondary_text"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearLayoutView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/linearLayoutUpload"
-                    app:layout_constraintEnd_toStartOf="@id/linearLayoutDownload"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="@dimen/_10sdp"
-                    >
-                    <TextView
-                        android:id="@+id/approvedCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_12sdp"
-                        style="@style/textColorPrimaryBlack"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        />
-                    <TextView
-                        android:id="@+id/textTitleApproved"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/uploadCount"
-                        android:text="@string/approved"
-                        android:textSize="@dimen/_10sdp"
-                        android:textColor="@color/secondary_text"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearLayoutDownload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/linearLayoutView"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/profileImage"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp"
+                    style="@style/textColorPrimaryBlack"
+                    android:textStyle="bold"
+                    android:enabled="false"
+                    />
+
+                <TextView
+                    android:id="@+id/userEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userName"
+                    android:padding="@dimen/_1sdp"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/secondary_text"
+                    android:textStyle="bold"
+                    android:enabled="false"
+                    />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userEmail"
+                    android:layout_marginTop="@dimen/_5sdp"
                     >
-                    <TextView
-                        android:id="@+id/rejectedCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_12sdp"
-                        style="@style/textColorPrimaryBlack"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        />
-                    <TextView
-                        android:id="@+id/textTitleRejected"
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutUpload"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/uploadCount"
-                        android:text="@string/rejected"
-                        android:textSize="@dimen/_10sdp"
-                        android:textColor="@color/secondary_text"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/linearLayoutView"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        >
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView
+                                android:id="@+id/uploadCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_12sdp"
+                                style="@style/textColorPrimaryBlack"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                />
+                            <ProgressBar
+                                android:id="@+id/uploadProgress"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:visibility="gone"
+                                />
+
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/textTitleUpload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/upload"
+                            android:textSize="@dimen/_10sdp"
+                            android:textColor="@color/secondary_text"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearLayoutView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/linearLayoutUpload"
+                        app:layout_constraintEnd_toStartOf="@id/linearLayoutDownload"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        >
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            >
+                            <TextView
+                                android:id="@+id/approvedCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_12sdp"
+                                style="@style/textColorPrimaryBlack"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/approveProgress"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:visibility="gone"
+                                />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/textTitleApproved"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/approved"
+                            android:textSize="@dimen/_10sdp"
+                            android:textColor="@color/secondary_text"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearLayoutDownload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/linearLayoutView"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        >
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView
+                                android:id="@+id/rejectedCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_12sdp"
+                                style="@style/textColorPrimaryBlack"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                />
+                            <ProgressBar
+                                android:id="@+id/pendingProgress"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:visibility="gone"
+                                />
+
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/textTitleRejected"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rejected"
+                            android:textSize="@dimen/_10sdp"
+                            android:textColor="@color/secondary_text"
+                            />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layoutChangePass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/layoutCount"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/changePassTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/change_password"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_12sdp"
+                        style="@style/textColorPrimaryBlack"
                         />
+                    <EditText
+                        android:id="@+id/currentPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/BackgroundUploadInput"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:hint="@string/current_password"
+                        android:textSize="@dimen/_10ssp"
+                        android:autofillHints="@string/current_password" />
+                    <EditText
+                        android:id="@+id/newPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/BackgroundUploadInput"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:hint="@string/new_password"
+                        android:textSize="@dimen/_10ssp"
+                        android:autofillHints="@string/new_password" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_gravity="end"
+                        >
+
+                        <Button
+                            android:id="@+id/buttonChangePass"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_25sdp"
+                            style="@style/primaryColorButton"
+                            android:text="@string/change"
+                            android:textSize="@dimen/_10ssp"
+                            android:padding="0dp"
+                            android:textStyle="bold"
+
+                            />
+                        <ProgressBar
+                            android:id="@+id/progress"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_gravity="center"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:indeterminate="true"
+                            android:indeterminateTintMode="src_atop"
+                            android:visibility="gone"
+                            />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutRecent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutChangePass"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    >
+                    <TextView
+                        android:id="@+id/recentUploadTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploads"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_12sdp"
+                        style="@style/textColorPrimaryBlack"
+                        />
+                    <TextView
+                        android:id="@+id/notAvailable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/not_available"
+                        android:textSize="@dimen/_10sdp"
+                        style="@style/textColorPrimary"
+                        android:padding="@dimen/_5sdp"
+                        android:visibility="gone"
+                        />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/uploadRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:orientation="vertical"
+                        android:overScrollMode="never"
+                        android:padding="@dimen/_5sdp"
+                        android:visibility="gone"
+                        />
+                    <ProgressBar
+                        android:id="@+id/uploadRecyclerProgress"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:visibility="gone"
+                        />
+
+
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-    </androidx.cardview.widget.CardView>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

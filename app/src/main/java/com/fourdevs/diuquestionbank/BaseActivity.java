@@ -52,13 +52,18 @@ public class BaseActivity extends AppCompatActivity {
     }
     private void checkCurrentUser() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        assert user != null;
-        user.getIdToken(true)
-                .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
-                        logOut();
-                    }
-                });
+        if(user!=null) {
+            user.getIdToken(true)
+                    .addOnCompleteListener(task -> {
+                        if (!task.isSuccessful()) {
+                            logOut();
+                        }
+                    });
+        } else {
+            preferenceManager.clear();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        }
     }
     private void logOut() {
         HashMap<String, Object> updates = new HashMap<>();
@@ -84,8 +89,6 @@ public class BaseActivity extends AppCompatActivity {
         if(isInternetAvailable()){
             checkCurrentUser();
             documentReference.update(Constants.KEY_AVAILABILITY, 1);
-        } else {
-            Toast.makeText(this, "No internet connection...", Toast.LENGTH_SHORT).show();
         }
     }
 }
