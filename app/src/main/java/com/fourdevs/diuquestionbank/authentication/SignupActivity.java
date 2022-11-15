@@ -147,9 +147,9 @@ public class SignupActivity extends AppCompatActivity {
         user.put(Constants.KEY_IS_ADMIN, false);
         user.put(Constants.KEY_PROFILE_PICTURE, null);
         user.put(Constants.KEY_IS_VERIFIED, false);
-        user.put(Constants.KEY_UPLOAD_COUNT, 0);
-        user.put(Constants.KEY_APPROVE_COUNT, 0);
-        user.put(Constants.KEY_REJECT_COUNT, 0);
+        user.put(Constants.KEY_UPLOAD_COUNT, "0");
+        user.put(Constants.KEY_APPROVE_COUNT, "0");
+        user.put(Constants.KEY_REJECT_COUNT, "0");
         database.collection(Constants.KEY_COLLECTION_USERS).document(userId).set(user)
                 .addOnSuccessListener(documentReference -> {
                     sendVerificationEmail();

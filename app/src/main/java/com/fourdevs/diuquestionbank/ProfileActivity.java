@@ -211,6 +211,7 @@ public class ProfileActivity extends BaseActivity implements CourseListener {
                         binding.uploadRecyclerProgress.setVisibility(View.GONE);
                     } else {
                         binding.notAvailable.setVisibility(View.VISIBLE);
+                        binding.uploadRecyclerProgress.setVisibility(View.GONE);
                     }
                 });
     }
