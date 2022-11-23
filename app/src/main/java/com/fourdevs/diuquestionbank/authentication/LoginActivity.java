@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
@@ -56,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             email = Objects.requireNonNull(binding.inputUserEmail.getText()).toString().trim();
             password = Objects.requireNonNull(binding.inputUserPassword.getText()).toString().trim();
 
-            if (isValidSignUpDetails()) {
+            if (isValidSignInDetails()) {
                 binding.buttonLogIn.setClickable(false);
                 loading(true);
                 logIn();
@@ -88,22 +89,26 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    if(user!=null && user.isEmailVerified()) {
-                        makeToast("Successfully Logged In");
-                        preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
+                    if(user!=null) {
                         preferenceManager.putSting(Constants.KEY_USER_ID, user.getUid());
                         preferenceManager.putSting(Constants.KEY_EMAIL, email);
-                        preferenceManager.putBoolean(Constants.KEY_READ_ONCE, false);
-                        preferenceManager.putBoolean(Constants.KEY_COUNT_ONCE, false);
-                        checkIsVerified();
-                        Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
-                        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(mainActivityIntent);
-                    }
-                    else {
-                        makeToast("Please verify your email address and try again");
-                        FirebaseAuth.getInstance().signOut();
-                        binding.buttonLogIn.setClickable(true);
+
+                        if(user.isEmailVerified()) {
+                            preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
+                            preferenceManager.putBoolean(Constants.KEY_READ_ONCE, false);
+                            preferenceManager.putBoolean(Constants.KEY_COUNT_ONCE, false);
+                            makeToast("Successfully Logged In");
+                            checkIsVerified();
+                            Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
+                            mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(mainActivityIntent);
+                        }
+                        else {
+                            preferenceManager.putBoolean(Constants.KEY_IS_VERIFICATION_PAGE, true);
+                            Intent intent = new Intent(getApplicationContext(), VerificationActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
                     }
                     loading(false);
                 }).addOnFailureListener(e -> {
@@ -113,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private Boolean isValidSignUpDetails() {
+    private Boolean isValidSignInDetails() {
         if (email.isEmpty()) {
             binding.inputUserEmail.setError("This field is required");
             binding.inputUserEmail.requestFocus();

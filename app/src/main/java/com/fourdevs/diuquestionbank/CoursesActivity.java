@@ -107,19 +107,12 @@ public class CoursesActivity extends BaseActivity implements CourseListener {
                 filterCourses.add(course);
             }
         }
-        if (filterCourses.isEmpty()) {
-            makeToast();
-        } else {
+        if (!filterCourses.isEmpty()) {
             CourseAdapter courseAdapter = new CourseAdapter(filterCourses, this,this);
             binding.courseRecyclerView.setAdapter(courseAdapter);
         }
     }
 
-
-
-    private void makeToast() {
-        Toast.makeText(getApplicationContext(), "No Data Found..",Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void onCourseClicked(Course course) {

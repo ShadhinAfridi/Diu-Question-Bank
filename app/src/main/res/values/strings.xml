@@ -85,6 +85,9 @@
     <string name="new_password">New password</string>
     <string name="change">Change</string>
     <string name="uploads">Uploads</string>
-    <string name="not_available">Not available...</string>
-    <string name="see_more">See more..</string>
+    <string name="not_available">Not available&#8230;</string>
+    <string name="see_more">See more&#8230;</string>
+    <string name="not_verified">Your account is not verified. Please verify your email.</string>
+    <string name="hi">Hi,</string>
+    <string name="resend">Resend</string>
 </resources>

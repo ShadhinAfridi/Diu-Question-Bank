@@ -27,6 +27,7 @@ public class Constants {
     public static final String KEY_COUNT_REJECTED = "countRejected";
     public static final String KEY_FCM_TOKEN = "fcmToken";
     public static final String KEY_AVAILABILITY  = "availability";
+    public static final String KEY_IS_VERIFICATION_PAGE  = "verificationPage";
 
     //contact
     public static final String KEY_COLLECTION_CONTACTS = "contacts";

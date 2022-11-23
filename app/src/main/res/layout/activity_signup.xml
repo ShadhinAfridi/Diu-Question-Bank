@@ -105,7 +105,6 @@
                 app:layout_constraintBottom_toBottomOf="@id/imageName"
                 android:hint="@string/name"
                 style="@style/EditTextStyle"
-                android:maxLength="25"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -163,7 +162,6 @@
                 app:layout_constraintEnd_toStartOf="@id/imageEmailCheck"
                 android:hint="@string/email"
                 style="@style/EditTextStyle"
-                android:maxLength="30"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView

@@ -19,7 +19,10 @@
         app:zoomage_minScale="0.6"
         app:zoomage_maxScale="8"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
+        android:padding="@dimen/_1sdp"
+        android:layout_margin="@dimen/_1sdp"
+        android:background="@drawable/background_preview"
         />
 
     <TextView
