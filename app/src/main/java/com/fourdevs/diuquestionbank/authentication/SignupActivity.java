@@ -8,30 +8,28 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import com.fourdevs.diuquestionbank.PrivacyPolicyActivity;
 import com.fourdevs.diuquestionbank.WelcomeActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivitySignupBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
+import com.fourdevs.diuquestionbank.viewmodel.AuthViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Objects;
 
 public class SignupActivity extends AppCompatActivity {
 
     private ActivitySignupBinding binding;
-    private FirebaseFirestore database ;
-    private FirebaseAuth mAuth;
+    private AuthViewModel authViewModel;
     private String userName, email, password, confirmPassword, userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        database = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
+        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
         setListeners();
     }
 
@@ -110,7 +108,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
     private void signUp() {
-        mAuth.createUserWithEmailAndPassword(email, password)
+        authViewModel.signUp(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         updateUserName();
@@ -126,12 +124,7 @@ public class SignupActivity extends AppCompatActivity {
         if (user != null) {
             userId = user.getUid();
         }
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(userName)
-                .build();
-
-        assert user != null;
-        user.updateProfile(profileUpdates)
+        authViewModel.updateUserName(userName)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         addToDatabase();
@@ -150,7 +143,8 @@ public class SignupActivity extends AppCompatActivity {
         user.put(Constants.KEY_UPLOAD_COUNT, "0");
         user.put(Constants.KEY_APPROVE_COUNT, "0");
         user.put(Constants.KEY_REJECT_COUNT, "0");
-        database.collection(Constants.KEY_COLLECTION_USERS).document(userId).set(user)
+
+        authViewModel.addSignUpToDb(user, userId)
                 .addOnSuccessListener(documentReference -> {
                     sendVerificationEmail();
                     makeToast("We've sent a verification email to "+email+". Please verify your email and Login");
@@ -163,29 +157,22 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void sendVerificationEmail() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            user.sendEmailVerification()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // email sent
-                            // after email is sent just logout the user and finish this activity
-                            loading(false);
-                            FirebaseAuth.getInstance().signOut();
-                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                            finish();
-                        }
-                        else
-                        {
-                            // email not sent, so display message and restart the activity or do whatever you wish to do
-                            //restart this activity
-                            overridePendingTransition(0, 0);
-                            finish();
-                            overridePendingTransition(0, 0);
-                            startActivity(getIntent());
-                        }
-                    });
-        }
+        authViewModel.sendVerificationEmail()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        loading(false);
+                        authViewModel.logOut();
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        finish();
+                    }
+                    else
+                    {
+                        overridePendingTransition(0, 0);
+                        finish();
+                        overridePendingTransition(0, 0);
+                        startActivity(getIntent());
+                    }
+                });
     }
 
     private void showPassword() {

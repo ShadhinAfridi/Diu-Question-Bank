@@ -17,10 +17,7 @@ import com.fourdevs.diuquestionbank.databinding.ActivityMainBinding;
 import com.fourdevs.diuquestionbank.repository.MainRepository;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
-import com.fourdevs.diuquestionbank.viewmodel.MainModelFactory;
 import com.fourdevs.diuquestionbank.viewmodel.MainViewModel;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -38,8 +35,7 @@ public class MainActivity extends BaseActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
-        MainRepository repository = new MainRepository(preferenceManager);
-        viewModel = new ViewModelProvider(this, new MainModelFactory(repository)).get(MainViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         if(!preferenceManager.getBoolean(Constants.KEY_READ_ONCE)) {
             Task<QuerySnapshot> querySnapshotTask = viewModel.updateUserData();
             querySnapshotTask.addOnSuccessListener(queryDocumentSnapshots -> setUserData())

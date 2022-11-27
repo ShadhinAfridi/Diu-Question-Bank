@@ -4,23 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.fourdevs.diuquestionbank.MainActivity;
 import com.fourdevs.diuquestionbank.WelcomeActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivityLoginBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
+import com.fourdevs.diuquestionbank.viewmodel.AuthViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
@@ -28,16 +26,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
     private String email, password;
-    private FirebaseAuth mAuth;
     private PreferenceManager preferenceManager;
+    private AuthViewModel authViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         preferenceManager = new PreferenceManager(getApplicationContext());
+        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
         setContentView(binding.getRoot());
-        mAuth = FirebaseAuth.getInstance();
         binding.textResetPassword.setClickable(true);
         setListeners();
     }
@@ -79,14 +77,14 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         binding.textResetPassword.setOnClickListener(view ->
-                startActivity(new Intent(getApplicationContext(), ResetPasswordActivity.class))
+                startActivity(new Intent(this, ResetPasswordActivity.class))
         );
 
 
     }
 
     private void logIn() {
-        mAuth.signInWithEmailAndPassword(email, password)
+        authViewModel.logIn(email, password)
                 .addOnSuccessListener(authResult -> {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if(user!=null) {
@@ -136,28 +134,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkIsVerified() {
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_USERS)
-                .whereEqualTo(Constants.KEY_USER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
-                .get()
-                .addOnCompleteListener(task -> {
-                    if(task.isSuccessful() && task.getResult() != null
-                            && task.getResult().getDocuments().size() > 0){
-                        DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                        if(Boolean.FALSE.equals(documentSnapshot.getBoolean(Constants.KEY_IS_VERIFIED))) {
-                            updateVerificationInfo();
-                        }
-                    }
-                });
-    }
-
-    private void updateVerificationInfo(){
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = database
-                .collection(Constants.KEY_COLLECTION_USERS)
-                .document(preferenceManager.getString(Constants.KEY_USER_ID)
-                );
-        documentReference.update(Constants.KEY_IS_VERIFIED, true);
+        authViewModel.checkIsVerified();
     }
 
     private void loading(Boolean isLoading){

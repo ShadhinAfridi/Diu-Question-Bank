@@ -1,6 +1,7 @@
 package com.fourdevs.diuquestionbank.utilities;
 
 public class Constants {
+    public static final String KEY_DB = "diuQbDatabase";
     public static final String KEY_COLLECTION_QUESTIONS = "questions";
     public static final String KEY_DEPARTMENT = "department";
     public static final String KEY_COURSE_CODE = "courseCode";

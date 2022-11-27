@@ -1,5 +1,7 @@
 package com.fourdevs.diuquestionbank.repository;
 
+import android.app.Application;
+
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
 import com.google.android.gms.tasks.Task;
@@ -15,8 +17,8 @@ import java.util.HashMap;
 public class MainRepository {
     private final PreferenceManager preferenceManager;
 
-    public MainRepository(PreferenceManager preferenceManager){
-        this.preferenceManager = preferenceManager;
+    public MainRepository(Application application){
+        this.preferenceManager = new PreferenceManager(application.getApplicationContext());
     }
 
     public Task<QuerySnapshot> getUserData() {

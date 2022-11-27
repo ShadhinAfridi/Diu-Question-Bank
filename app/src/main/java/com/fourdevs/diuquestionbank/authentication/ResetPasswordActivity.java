@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.fourdevs.diuquestionbank.WelcomeActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivityResetPasswordBinding;
+import com.fourdevs.diuquestionbank.viewmodel.AuthViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -18,11 +20,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     private ActivityResetPasswordBinding binding;
     private String email;
+    private AuthViewModel authViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityResetPasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
         setListeners();
     }
 
@@ -45,8 +50,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     private void sendResetEmail() {
         binding.buttonResetPassword.setClickable(false);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.sendPasswordResetEmail(email)
+        authViewModel.sendResetPasswordEmail(email)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         makeToast("A password reset email to "+ email);

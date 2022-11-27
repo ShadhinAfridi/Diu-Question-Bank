@@ -64,7 +64,6 @@
     <string name="question">Question</string>
     <string name="notice">Notice</string>
     <string name="approved">Approved</string>
-    <string name="rejected">Pending</string>
     <string name="reset">Reset</string>
     <string name="reset_npassword">Reset \nPassword</string>
     <string name="create_n_account">Create \nAccount</string>
@@ -90,4 +89,10 @@
     <string name="not_verified">Your account is not verified. Please verify your email.</string>
     <string name="hi">Hi,</string>
     <string name="resend">Resend</string>
+    <string name="course_code_ex_cse_111">Course Code (Ex: CSE-111)</string>
+    <string name="uploaded">Uploaded</string>
+    <string name="pending">Pending</string>
+    <string name="rejected">Rejected</string>
+    <string name="cancel">Cancel</string>
+    <string name="_0">0</string>
 </resources>

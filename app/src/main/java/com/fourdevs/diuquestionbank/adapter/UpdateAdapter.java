@@ -1,10 +1,13 @@
 package com.fourdevs.diuquestionbank.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fourdevs.diuquestionbank.R;
@@ -13,13 +16,13 @@ import com.fourdevs.diuquestionbank.listeners.CourseListener;
 import com.fourdevs.diuquestionbank.models.Course;
 import java.util.List;
 
-public class UpdateAdapter extends RecyclerView.Adapter<UpdateAdapter.CourseViewHolder>{
+public class UpdateAdapter extends ListAdapter<Course,UpdateAdapter.CourseViewHolder> {
 
-    private final List<Course> coursers;
-    private CourseListener courseListener;
+    private final CourseListener courseListener;
 
-    public UpdateAdapter(List<Course> departments, CourseListener courseListener) {
-        this.coursers = departments;
+    public UpdateAdapter(@NonNull DiffUtil.ItemCallback<Course> diffCallback,
+                         CourseListener courseListener) {
+        super(diffCallback);
         this.courseListener = courseListener;
     }
 
@@ -36,12 +39,8 @@ public class UpdateAdapter extends RecyclerView.Adapter<UpdateAdapter.CourseView
 
     @Override
     public void onBindViewHolder(@NonNull UpdateAdapter.CourseViewHolder holder, int position) {
-        holder.setCourseData(coursers.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return coursers.size();
+        Course current = getItem(position);
+        holder.setCourseData(current.getCourse());
     }
 
     static class CourseViewHolder extends RecyclerView.ViewHolder{

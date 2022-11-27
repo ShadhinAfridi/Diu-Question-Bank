@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/_5sdp"
+    android:layout_margin="@dimen/_1sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -20,19 +20,8 @@
         app:zoomage_maxScale="8"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:padding="@dimen/_1sdp"
-        android:layout_margin="@dimen/_1sdp"
-        android:background="@drawable/background_preview"
+        android:padding="@dimen/_5sdp"
         />
 
-    <TextView
-        android:id="@+id/pageNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="30dp"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

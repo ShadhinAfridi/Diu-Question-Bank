@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".ProfileActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,11 +70,26 @@
             android:outlineSpotShadowColor="@color/primary"
             tools:ignore="UnusedAttribute">
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_10sdp"
                 >
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iconSetting"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="2dp"
+                    android:padding="@dimen/_5sdp"
+                    android:src="@drawable/ic_settings"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/textColorPrimaryBlack"
+                    />
+
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/profileImage"
                     android:layout_width="@dimen/_80sdp"
@@ -138,6 +154,27 @@
                     android:textStyle="bold"
                     android:enabled="false"
                     />
+                <LinearLayout
+                    android:id="@+id/settingOptions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/iconSetting"
+                    app:layout_constraintTop_toBottomOf="@id/iconSetting"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp"
+                    style="@style/primaryColorButton"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        android:id="@+id/changePasswordBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/change_password"
+                        android:textColor="@color/white"
+                        />
+
+                </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutCount"
@@ -155,75 +192,52 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/linearLayoutView"
+                        app:layout_constraintEnd_toStartOf="@id/linearLayoutApproved"
                         android:orientation="vertical"
                         android:gravity="center"
                         android:padding="@dimen/_10sdp"
                         >
-                        <FrameLayout
+                        <TextView
+                            android:id="@+id/uploadCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            >
-
-                            <TextView
-                                android:id="@+id/uploadCount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textSize="@dimen/_12sdp"
-                                style="@style/textColorPrimaryBlack"
-                                android:layout_marginBottom="@dimen/_5sdp"
-                                />
-                            <ProgressBar
-                                android:id="@+id/uploadProgress"
-                                android:layout_width="@dimen/_20sdp"
-                                android:layout_height="@dimen/_20sdp"
-                                android:visibility="gone"
-                                />
-
-                        </FrameLayout>
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_12sdp"
+                            android:text="@string/_0"
+                            style="@style/textColorPrimaryBlack"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            />
 
                         <TextView
                             android:id="@+id/textTitleUpload"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/upload"
+                            android:text="@string/uploaded"
                             android:textSize="@dimen/_10sdp"
                             android:textColor="@color/secondary_text"
                             />
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/linearLayoutView"
+                        android:id="@+id/linearLayoutApproved"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toEndOf="@id/linearLayoutUpload"
-                        app:layout_constraintEnd_toStartOf="@id/linearLayoutDownload"
+                        app:layout_constraintEnd_toStartOf="@id/linearLayoutPending"
                         app:layout_constraintTop_toTopOf="parent"
                         android:orientation="vertical"
                         android:gravity="center"
                         android:padding="@dimen/_10sdp"
                         >
-                        <FrameLayout
+                        <TextView
+                            android:id="@+id/approvedCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            >
-                            <TextView
-                                android:id="@+id/approvedCount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textSize="@dimen/_12sdp"
-                                style="@style/textColorPrimaryBlack"
-                                android:layout_marginBottom="@dimen/_5sdp"
-                                />
-
-                            <ProgressBar
-                                android:id="@+id/approveProgress"
-                                android:layout_width="@dimen/_20sdp"
-                                android:layout_height="@dimen/_20sdp"
-                                android:visibility="gone"
-                                />
-                        </FrameLayout>
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_12sdp"
+                            style="@style/textColorPrimaryBlack"
+                            android:text="@string/_0"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            />
 
                         <TextView
                             android:id="@+id/textTitleApproved"
@@ -235,38 +249,56 @@
                             />
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/linearLayoutDownload"
+                        android:id="@+id/linearLayoutPending"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/linearLayoutView"
+                        app:layout_constraintStart_toEndOf="@id/linearLayoutApproved"
+                        app:layout_constraintEnd_toStartOf="@id/linearLayoutRejected"
                         android:orientation="vertical"
                         android:gravity="center"
                         android:padding="@dimen/_10sdp"
                         >
-                        <FrameLayout
+                        <TextView
+                            android:id="@+id/pendingCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            >
-
-                            <TextView
-                                android:id="@+id/rejectedCount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textSize="@dimen/_12sdp"
-                                style="@style/textColorPrimaryBlack"
-                                android:layout_marginBottom="@dimen/_5sdp"
-                                />
-                            <ProgressBar
-                                android:id="@+id/pendingProgress"
-                                android:layout_width="@dimen/_20sdp"
-                                android:layout_height="@dimen/_20sdp"
-                                android:visibility="gone"
-                                />
-
-                        </FrameLayout>
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_12sdp"
+                            android:text="@string/_0"
+                            style="@style/textColorPrimaryBlack"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            />
+                        <TextView
+                            android:id="@+id/textTitlePending"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pending"
+                            android:textSize="@dimen/_10sdp"
+                            android:textColor="@color/secondary_text"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearLayoutRejected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/linearLayoutPending"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        >
+                        <TextView
+                            android:id="@+id/rejectedCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_12sdp"
+                            android:text="@string/_0"
+                            style="@style/textColorPrimaryBlack"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            />
 
                         <TextView
                             android:id="@+id/textTitleRejected"
@@ -282,85 +314,10 @@
 
 
                 <LinearLayout
-                    android:id="@+id/layoutChangePass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/layoutCount"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="vertical"
-                    >
-
-                    <TextView
-                        android:id="@+id/changePassTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/change_password"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_12sdp"
-                        style="@style/textColorPrimaryBlack"
-                        />
-                    <EditText
-                        android:id="@+id/currentPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/BackgroundUploadInput"
-                        android:padding="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:hint="@string/current_password"
-                        android:textSize="@dimen/_10ssp"
-                        android:autofillHints="@string/current_password" />
-                    <EditText
-                        android:id="@+id/newPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/BackgroundUploadInput"
-                        android:padding="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:hint="@string/new_password"
-                        android:textSize="@dimen/_10ssp"
-                        android:autofillHints="@string/new_password" />
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_gravity="end"
-                        >
-
-                        <Button
-                            android:id="@+id/buttonChangePass"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_25sdp"
-                            style="@style/primaryColorButton"
-                            android:text="@string/change"
-                            android:textSize="@dimen/_10ssp"
-                            android:padding="0dp"
-                            android:textStyle="bold"
-
-                            />
-                        <ProgressBar
-                            android:id="@+id/progress"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_gravity="center"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:indeterminate="true"
-                            android:indeterminateTintMode="src_atop"
-                            android:visibility="gone"
-                            />
-
-                    </FrameLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/layoutRecent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutChangePass"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutCount"
                     app:layout_constraintStart_toStartOf="parent"
                     android:orientation="vertical"
                     android:layout_marginTop="@dimen/_10sdp"
