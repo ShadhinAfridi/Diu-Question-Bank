@@ -14,18 +14,9 @@ public abstract class AsyncTasks {
     }
 
     private void startBackground() {
-        onPreExecute();
-        executors.execute(new Runnable() {
-            @Override
-            public void run() {
-                doInBackground();
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        onPostExecute();
-                    }
-                });
-            }
+        executors.execute(() -> {
+            doInBackground();
+            new Handler(Looper.getMainLooper()).post(this::onPostExecute);
         });
     }
 
@@ -40,8 +31,6 @@ public abstract class AsyncTasks {
     public boolean isShutdown() {
         return executors.isShutdown();
     }
-
-    public abstract void onPreExecute();
 
     public abstract void doInBackground();
 

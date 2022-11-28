@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/input_background"
     android:animateLayoutChanges="true"
-    tools:context=".PdfViewerActivity">
+    tools:context=".activities.PdfViewerActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
@@ -32,7 +32,6 @@
             app:tint="@color/white"
             />
 
-
         <TextView
             android:id="@+id/textCourseName"
             android:layout_width="0dp"
@@ -46,9 +45,23 @@
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/iconBack"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageInfo"
             app:layout_constraintStart_toEndOf="@id/iconBack"
             app:layout_constraintTop_toTopOf="@id/iconBack" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageInfo"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginTop="2dp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:tint="@color/white"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

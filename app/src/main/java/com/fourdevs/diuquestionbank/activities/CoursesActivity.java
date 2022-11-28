@@ -1,4 +1,4 @@
-package com.fourdevs.diuquestionbank;
+package com.fourdevs.diuquestionbank.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,11 +42,16 @@ public class CoursesActivity extends BaseActivity implements CourseListener {
     }
 
     private void setAdapter() {
+        binding.courseProgressBar.setVisibility(View.VISIBLE);
         courseAdapter = new CourseAdapter(new CourseDiff(),this,this);
         binding.courseRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         binding.courseRecyclerView.setAdapter(courseAdapter);
-        courseViewModel.getCourse(departmentName).observe(this, courseAdapter::submitList);
-        new Handler().postDelayed(() -> binding.courseProgressBar.setVisibility(View.GONE),300);
+        courseViewModel.getCourse(departmentName).observe(this, it->{
+            courseAdapter.submitList(it);
+            if(it.size()>0) {
+                binding.courseProgressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void setListeners() {
@@ -97,6 +102,8 @@ public class CoursesActivity extends BaseActivity implements CourseListener {
         Intent intent = new Intent(getApplicationContext(), PdfViewerActivity.class);
         intent.putExtra(Constants.KEY_NAME, course.courseName+" "+course.semester+"("+course.year+")");
         intent.putExtra(Constants.KEY_PDF_URL, course.fileUrl);
+        intent.putExtra(Constants.KEY_UPLOAD_DATE, course.dateTime);
+        intent.putExtra(Constants.KEY_USER_ID, course.userId);
         startActivity(intent);
     }
 }

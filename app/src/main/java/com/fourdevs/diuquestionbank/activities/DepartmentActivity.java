@@ -1,8 +1,7 @@
-package com.fourdevs.diuquestionbank;
+package com.fourdevs.diuquestionbank.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -40,12 +39,9 @@ public class DepartmentActivity extends BaseActivity implements DepartmentListen
     }
 
     private void callNetwork() {
-        new AsyncTasks() {
-            @Override
-            public void onPreExecute() {
-                binding.departmentProgressBar.setVisibility(View.VISIBLE);
-            }
+        binding.departmentProgressBar.setVisibility(View.VISIBLE);
 
+        new AsyncTasks() {
             @Override
             public void doInBackground() {
                 courseViewModel.networkCourse();
@@ -53,10 +49,9 @@ public class DepartmentActivity extends BaseActivity implements DepartmentListen
 
             @Override
             public void onPostExecute() {
-                new Handler().postDelayed(() -> binding.departmentProgressBar.setVisibility(View.GONE),1000);
+
             }
         }.execute();
-
     }
 
     private void getData() {
@@ -73,6 +68,10 @@ public class DepartmentActivity extends BaseActivity implements DepartmentListen
             departments.clear();
             departments.addAll(setDepartments);
             Collections.sort(departments);
+
+            if(it.size()>0) {
+                binding.departmentProgressBar.setVisibility(View.GONE);
+            }
 
             for(int i=0; i<departments.size(); i++) {
                 Course courseNew = new Course();

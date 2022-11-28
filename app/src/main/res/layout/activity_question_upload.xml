@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    tools:context=".QuestionUploadActivity">
+    tools:context=".activities.QuestionUploadActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -31,19 +31,7 @@
             app:tint="@color/white"
             />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageInfo"
-            android:layout_width="@dimen/_26sdp"
-            android:layout_height="@dimen/_26sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            android:layout_marginTop="2dp"
-            android:padding="@dimen/_5sdp"
-            android:src="@drawable/ic_info"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:tint="@color/white"
-            />
+
 
         <TextView
             android:layout_width="0dp"
@@ -58,7 +46,7 @@
             android:textStyle="bold"
             android:text="@string/upload_question"
             app:layout_constraintBottom_toBottomOf="@id/imageBack"
-            app:layout_constraintEnd_toStartOf="@id/imageInfo"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imageBack"
             app:layout_constraintTop_toTopOf="@id/imageBack"
             />

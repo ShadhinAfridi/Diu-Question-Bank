@@ -13,6 +13,7 @@ public class Constants {
     public static final String KEY_IS_APPROVED= "isApproved";
     public static final String KEY_READ_ONCE= "readOnce";
     public static final String KEY_COUNT_ONCE= "countOnce";
+    public static final String KEY_UPLOAD_DATE= "uploadDate";
 
     //authentication
     public static final String KEY_COLLECTION_USERS = "users";

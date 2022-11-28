@@ -95,4 +95,7 @@
     <string name="rejected">Rejected</string>
     <string name="cancel">Cancel</string>
     <string name="_0">0</string>
+    <string name="date">Date :</string>
+    <string name="name_">Name :</string>
+    <string name="info">Info</string>
 </resources>

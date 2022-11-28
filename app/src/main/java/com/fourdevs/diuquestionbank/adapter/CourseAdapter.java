@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fourdevs.diuquestionbank.PdfViewerActivity;
+import com.fourdevs.diuquestionbank.activities.PdfViewerActivity;
 import com.fourdevs.diuquestionbank.R;
 import com.fourdevs.diuquestionbank.databinding.ItemContainerCoursesBinding;
 import com.fourdevs.diuquestionbank.listeners.CourseListener;

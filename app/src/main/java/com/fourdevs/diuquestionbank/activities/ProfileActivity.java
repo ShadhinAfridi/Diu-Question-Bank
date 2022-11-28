@@ -1,4 +1,4 @@
-package com.fourdevs.diuquestionbank;
+package com.fourdevs.diuquestionbank.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -22,10 +22,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.fourdevs.diuquestionbank.adapter.CourseDiff;
 import com.fourdevs.diuquestionbank.adapter.UpdateAdapter;
+import com.fourdevs.diuquestionbank.authentication.LoginActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivityProfileBinding;
 import com.fourdevs.diuquestionbank.databinding.DialogueChangePasswordBinding;
 import com.fourdevs.diuquestionbank.listeners.CourseListener;
 import com.fourdevs.diuquestionbank.models.Course;
+import com.fourdevs.diuquestionbank.utilities.AsyncTasks;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
 import com.fourdevs.diuquestionbank.viewmodel.AuthViewModel;
@@ -40,11 +42,13 @@ public class ProfileActivity extends BaseActivity implements CourseListener {
     private int pendingCount = 0, approveCount = 0, rejectCount = 0;
     private AuthViewModel authViewModel;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
         preferenceManager = new PreferenceManager(getApplicationContext());
         setListeners();
@@ -59,7 +63,18 @@ public class ProfileActivity extends BaseActivity implements CourseListener {
         if(preferenceManager.getString(Constants.KEY_PROFILE_PICTURE) != null) {
             binding.profileImage.setImageBitmap(getBitmapFromEncodedString(preferenceManager.getString(Constants.KEY_PROFILE_PICTURE)));
         }
-        authViewModel.networkCourse(preferenceManager.getString(Constants.KEY_USER_ID));
+        new AsyncTasks() {
+            @Override
+            public void doInBackground() {
+                authViewModel.networkCourse(preferenceManager.getString(Constants.KEY_USER_ID));
+            }
+
+            @Override
+            public void onPostExecute() {
+
+            }
+        }.execute();
+
     }
 
     private void setListeners() {
@@ -68,6 +83,16 @@ public class ProfileActivity extends BaseActivity implements CourseListener {
             startActivity(mainIntent);
             finish();
         });
+
+        binding.iconLogOut.setOnClickListener(view-> authViewModel.deleteFcmToken().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                authViewModel.logOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+            } else {
+                makeToast("Something went wrong!");
+            }
+        }));
 
         binding.iconSetting.setOnClickListener(view-> {
             if(binding.settingOptions.getVisibility() == View.VISIBLE) {
@@ -113,6 +138,8 @@ public class ProfileActivity extends BaseActivity implements CourseListener {
                 }
             }
     );
+
+
 
     private String encodeImage(Bitmap bitmap){
         int previewWidth = 200;
@@ -235,4 +262,5 @@ public class ProfileActivity extends BaseActivity implements CourseListener {
     public void onCourseClicked(Course course) {
 
     }
+
 }

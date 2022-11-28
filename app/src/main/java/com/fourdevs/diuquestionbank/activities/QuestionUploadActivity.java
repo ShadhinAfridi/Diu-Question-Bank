@@ -1,4 +1,4 @@
-package com.fourdevs.diuquestionbank;
+package com.fourdevs.diuquestionbank.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.documentfile.provider.DocumentFile;
 
+import com.fourdevs.diuquestionbank.R;
 import com.fourdevs.diuquestionbank.databinding.ActivityQuestionUploadBinding;
 import com.fourdevs.diuquestionbank.databinding.ProgressBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;

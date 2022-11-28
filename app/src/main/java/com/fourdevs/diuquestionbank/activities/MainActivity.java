@@ -1,4 +1,4 @@
-package com.fourdevs.diuquestionbank;
+package com.fourdevs.diuquestionbank.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -14,12 +14,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.fourdevs.diuquestionbank.authentication.LoginActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivityMainBinding;
-import com.fourdevs.diuquestionbank.repository.MainRepository;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
 import com.fourdevs.diuquestionbank.viewmodel.MainViewModel;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QuerySnapshot;
 
 
@@ -104,15 +102,12 @@ public class MainActivity extends BaseActivity {
 
     private void logOut() {
         makeToast("Signing Out...");
-        Task<Void> task =  viewModel.logOut();
-        if(task != null) {
-            task.addOnSuccessListener(unused -> {
-                    FirebaseAuth.getInstance().signOut();
-                    preferenceManager.clear();
+        viewModel.deleteFcmToken()
+                .addOnSuccessListener(unused -> {
+                    viewModel.logOut();
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    finish();
                 });
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            finish();
-        }
     }
 
     private Boolean checkPermissions(){

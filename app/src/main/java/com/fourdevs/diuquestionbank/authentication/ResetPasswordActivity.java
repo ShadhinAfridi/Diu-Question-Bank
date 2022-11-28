@@ -9,10 +9,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.fourdevs.diuquestionbank.WelcomeActivity;
+import com.fourdevs.diuquestionbank.activities.WelcomeActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivityResetPasswordBinding;
 import com.fourdevs.diuquestionbank.viewmodel.AuthViewModel;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 

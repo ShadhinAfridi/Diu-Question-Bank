@@ -39,20 +39,5 @@ public class MainRepository {
                         preferenceManager.putBoolean(Constants.KEY_READ_ONCE, true);
                     }
                 });
-
     }
-
-    public Task<Void> logOut() {
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = database
-                .collection(Constants.KEY_COLLECTION_USERS).document(
-                        preferenceManager.getString(Constants.KEY_USER_ID)
-                );
-        HashMap<String, Object> updates = new HashMap<>();
-        updates.put(Constants.KEY_FCM_TOKEN, FieldValue.delete());
-        return documentReference.update(updates);
-    }
-
-
-
 }

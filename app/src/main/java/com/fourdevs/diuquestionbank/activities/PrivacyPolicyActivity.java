@@ -1,4 +1,4 @@
-package com.fourdevs.diuquestionbank;
+package com.fourdevs.diuquestionbank.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

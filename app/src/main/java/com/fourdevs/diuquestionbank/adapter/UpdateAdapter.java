@@ -57,7 +57,9 @@ public class UpdateAdapter extends ListAdapter<Course,UpdateAdapter.CourseViewHo
             binding.department.setText(course.departmentName);
             binding.semesterName.setText(course.semester +" "+course.year);
             if(course.approved != null) {
-                if(!course.approved) {
+                if(course.approved) {
+                    binding.status.setText("Approved");
+                } else {
                     binding.status.setText("Pending");
                     binding.status.setTextColor(R.color.primary);
                 }

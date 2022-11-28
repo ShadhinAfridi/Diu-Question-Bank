@@ -1,4 +1,4 @@
-package com.fourdevs.diuquestionbank;
+package com.fourdevs.diuquestionbank.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,14 +10,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.fourdevs.diuquestionbank.adapter.PdfAdapter;
 import com.fourdevs.diuquestionbank.databinding.ActivityPdfViewerBinding;
+import com.fourdevs.diuquestionbank.databinding.DialougeUploaderInfoBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
+import com.fourdevs.diuquestionbank.viewmodel.SharedViewModel;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -30,21 +31,26 @@ import java.util.List;
 public class PdfViewerActivity extends BaseActivity {
 
     private ActivityPdfViewerBinding binding;
-    private String courseLink;
+    private String courseLink, uploadDate, uploaderId;
     private ParcelFileDescriptor fileDescriptor;
     private PdfRenderer pdfRenderer;
     private DisplayMetrics metrics;
+    private SharedViewModel sharedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPdfViewerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
         metrics = getApplicationContext().getResources().getDisplayMetrics();
         loading(true);
         Intent intent = getIntent();
         String courseName = intent.getStringExtra(Constants.KEY_NAME);
         courseLink = intent.getStringExtra(Constants.KEY_PDF_URL);
+        uploadDate = intent.getStringExtra(Constants.KEY_UPLOAD_DATE);
+        uploaderId = intent.getStringExtra(Constants.KEY_USER_ID);
+
         binding.textCourseName.setText(courseName);
         downloadActivity();
         setListener();
@@ -54,6 +60,7 @@ public class PdfViewerActivity extends BaseActivity {
 
     private void setListener() {
         binding.iconBack.setOnClickListener(view -> onBackPressed());
+        binding.imageInfo.setOnClickListener(view-> uploaderInfo());
     }
 
     private void downloadActivity(){
@@ -128,6 +135,28 @@ public class PdfViewerActivity extends BaseActivity {
 
     private void makeToast(String value) {
         Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
+    }
+
+    private void uploaderInfo() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        DialougeUploaderInfoBinding viewBinding = DialougeUploaderInfoBinding.inflate(getLayoutInflater());
+        builder.setView(viewBinding.getRoot());
+        builder.setCancelable(true);
+        AlertDialog alert = builder.create();
+        builder.setNegativeButton("Ok", (dialog, which) -> alert.dismiss()).show();
+
+        sharedViewModel.getOnlineUserData(uploaderId);
+
+        sharedViewModel.getUserData(uploaderId).observe(this, it->{
+            try{
+                viewBinding.uploaderName.setText(it.userName);
+                viewBinding.uploadDate.setText(uploadDate);
+            } catch (Exception e) {
+                sharedViewModel.getOnlineUserData(uploaderId);
+            }
+        });
+
+
     }
 
 }

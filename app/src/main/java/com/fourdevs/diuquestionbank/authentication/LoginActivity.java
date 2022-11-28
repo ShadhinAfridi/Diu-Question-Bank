@@ -11,8 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.fourdevs.diuquestionbank.MainActivity;
-import com.fourdevs.diuquestionbank.WelcomeActivity;
+import com.fourdevs.diuquestionbank.activities.MainActivity;
+import com.fourdevs.diuquestionbank.activities.WelcomeActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivityLoginBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;

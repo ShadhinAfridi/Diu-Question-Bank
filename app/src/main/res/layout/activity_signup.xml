@@ -39,6 +39,7 @@
             android:textSize="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_60sdp"
             android:padding="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_10sdp"
@@ -89,23 +90,35 @@
                 android:layout_height="@dimen/_24sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:src="@drawable/ic_person"
                 android:padding="@dimen/_3sdp"
                 android:tint="@color/lite_text"
                 />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/inputUserName"
+
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/imageName"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imageName"
                 app:layout_constraintEnd_toStartOf="@id/imageNameCheck"
-                app:layout_constraintBottom_toBottomOf="@id/imageName"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:hint="@string/name"
-                style="@style/EditTextStyle"
-                />
+                app:boxBackgroundColor="@android:color/transparent"
+                android:background="@android:color/transparent"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageNameCheck"
@@ -113,7 +126,7 @@
                 android:layout_height="@dimen/_24sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:src="@drawable/ic_done"
                 android:padding="@dimen/_3sdp"
                 android:tint="@color/lite_text"
@@ -151,18 +164,28 @@
                 android:tint="@color/lite_text"
                 />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/inputUserEmail"
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imageEmail"
                 app:layout_constraintEnd_toStartOf="@id/imageEmailCheck"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:hint="@string/email"
-                style="@style/EditTextStyle"
-                />
+                app:boxBackgroundColor="@android:color/transparent"
+                android:background="@android:color/transparent"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputUserEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageEmailCheck"
@@ -208,19 +231,28 @@
                 android:tint="@color/lite_text"
                 />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/inputUserPassword"
-                android:inputType="textPassword"
-                android:maxLength="20"
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imagePassword"
                 app:layout_constraintEnd_toStartOf="@id/imagePasswordVisible"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:hint="@string/password"
-                style="@style/EditTextStyle"
-                />
+                app:boxBackgroundColor="@android:color/transparent"
+                android:background="@android:color/transparent"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputUserPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imagePasswordVisible"
@@ -279,19 +311,28 @@
                 android:tint="@color/lite_text"
                 />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/inputUserConfirmPassword"
-                android:inputType="textPassword"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imageConfirmPassword"
                 app:layout_constraintEnd_toStartOf="@id/imageConfirmPasswordVisible"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:hint="@string/confirm_password"
-                style="@style/EditTextStyle"
-                android:maxLength="20"
-                />
+                app:boxBackgroundColor="@android:color/transparent"
+                android:background="@android:color/transparent"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputUserConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/_12sdp"
+                    android:imeOptions="actionDone"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageConfirmPasswordVisible"
@@ -333,7 +374,7 @@
 
 
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

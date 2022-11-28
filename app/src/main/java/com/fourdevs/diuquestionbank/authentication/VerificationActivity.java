@@ -3,19 +3,15 @@ package com.fourdevs.diuquestionbank.authentication;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.fourdevs.diuquestionbank.MainActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivityVerificationBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
 import com.fourdevs.diuquestionbank.viewmodel.AuthViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class VerificationActivity extends AppCompatActivity {
     private ActivityVerificationBinding binding;

@@ -83,20 +83,12 @@ public class AuthViewModel extends AndroidViewModel {
         return authRepository.addSignUpToDb(user, userId);
     }
 
-    public FirebaseUser getCurrentUser() {
-        return authRepository.getCurrentUser();
-    }
-
     public Task<Void> updateUserName(String userName) {
         return authRepository.updateUserName(userName);
     }
 
     public Task<Void> sendVerificationEmail() {
         return authRepository.sendVerificationEmail();
-    }
-
-    public void logOut() {
-        authRepository.logOut();
     }
 
     public Task<Void> sendResetPasswordEmail(String email) {
@@ -113,6 +105,14 @@ public class AuthViewModel extends AndroidViewModel {
 
     public Task<Void> checkCurrentPassword(String currentPassword) {
         return authRepository.checkCurrentPassword(currentPassword);
+    }
+
+    public void logOut() {
+        authRepository.logOut();
+    }
+
+    public Task<Void> deleteFcmToken() {
+        return authRepository.deleteFcmToken();
     }
 
 }

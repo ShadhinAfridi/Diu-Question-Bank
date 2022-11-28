@@ -1,9 +1,6 @@
 package com.fourdevs.diuquestionbank.repository;
 
 import android.app.Application;
-import android.util.Log;
-
-import androidx.appcompat.widget.AppCompatImageView;
 
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
@@ -16,6 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -105,12 +103,24 @@ public class AuthRepository {
         return user.sendEmailVerification();
     }
 
-    public void logOut() {
-        FirebaseAuth.getInstance().signOut();
-    }
-
     public Task<Void> sendResetPasswordEmail(String email) {
         return auth.sendPasswordResetEmail(email);
+    }
+
+    public Task<Void> deleteFcmToken() {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = database
+                .collection(Constants.KEY_COLLECTION_USERS).document(
+                        preferenceManager.getString(Constants.KEY_USER_ID)
+                );
+        HashMap<String, Object> updates = new HashMap<>();
+        updates.put(Constants.KEY_FCM_TOKEN, FieldValue.delete());
+        return documentReference.update(updates);
+    }
+
+    public void logOut() {
+        FirebaseAuth.getInstance().signOut();
+        preferenceManager.clear();
     }
 
 

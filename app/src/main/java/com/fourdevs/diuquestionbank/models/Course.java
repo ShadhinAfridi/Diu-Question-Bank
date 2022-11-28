@@ -3,11 +3,8 @@ package com.fourdevs.diuquestionbank.models;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 import com.fourdevs.diuquestionbank.utilities.Constants;
-
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity(tableName = Constants.KEY_COLLECTION_QUESTIONS)
 public class Course implements Serializable {
