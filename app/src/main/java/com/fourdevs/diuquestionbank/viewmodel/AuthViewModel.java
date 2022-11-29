@@ -115,4 +115,12 @@ public class AuthViewModel extends AndroidViewModel {
         return authRepository.deleteFcmToken();
     }
 
+    public void getToken() {
+        authRepository.getToken();
+    }
+
+    public void updateUserActivity(int value) {
+        authRepository.updateUserActivity(value);
+    }
+
 }

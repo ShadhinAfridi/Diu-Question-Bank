@@ -23,10 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DIUQuestionBank">
-        <activity
-            android:name=".activities.WelcomeActivity"
-            android:exported="false"
-            android:screenOrientation="locked"/>
+
         <activity
             android:name=".authentication.VerificationActivity"
             android:exported="false"
@@ -93,7 +90,7 @@
             android:exported="false"
             android:screenOrientation="locked" />
         <activity
-            android:name=".activities.SplashScreenActivity"
+            android:name=".activities.WelcomeActivity"
             android:exported="true"
             android:screenOrientation="locked">
             <intent-filter>

@@ -1,6 +1,7 @@
 package com.fourdevs.diuquestionbank.activities;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -8,12 +9,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.fourdevs.diuquestionbank.authentication.LoginActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivityMainBinding;
+import com.fourdevs.diuquestionbank.databinding.DialogueChangePasswordBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
 import com.fourdevs.diuquestionbank.viewmodel.MainViewModel;
@@ -134,4 +137,12 @@ public class MainActivity extends BaseActivity {
         Toast.makeText(getApplicationContext(),message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", (dialog, id) -> MainActivity.this.finish())
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss()).show();
+    }
 }

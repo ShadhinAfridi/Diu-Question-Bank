@@ -2,6 +2,10 @@ package com.fourdevs.diuquestionbank.repository;
 
 import android.app.Application;
 
+import com.fourdevs.diuquestionbank.room.AppDatabase;
+import com.fourdevs.diuquestionbank.room.QuestionsDao;
+import com.fourdevs.diuquestionbank.room.UserDao;
+import com.fourdevs.diuquestionbank.utilities.AsyncTasks;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
 import com.google.android.gms.tasks.Task;
@@ -15,6 +19,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 
@@ -24,6 +29,8 @@ public class AuthRepository {
     private final PreferenceManager preferenceManager;
     private final FirebaseAuth auth;
     private FirebaseUser user;
+    private final QuestionsDao questionsDao;
+    private final UserDao userDao;
 
 
     public AuthRepository(Application application) {
@@ -31,7 +38,9 @@ public class AuthRepository {
         preferenceManager = new PreferenceManager(application.getApplicationContext());
         user = FirebaseAuth.getInstance().getCurrentUser();
         auth = FirebaseAuth.getInstance();
-
+        AppDatabase appDatabase = AppDatabase.getDatabase(application);
+        questionsDao = appDatabase.questionsDao();
+        userDao = appDatabase.userDao();
     }
 
     public Task<Void> checkCurrentPassword(String currentPassword) {
@@ -119,10 +128,58 @@ public class AuthRepository {
     }
 
     public void logOut() {
-        FirebaseAuth.getInstance().signOut();
-        preferenceManager.clear();
+        new AsyncTasks() {
+            @Override
+            public void doInBackground() {
+                questionsDao.DeleteAllCourse();
+                userDao.DeleteAllUsers();
+                preferenceManager.clear();
+            }
+
+            @Override
+            public void onPostExecute() {
+                FirebaseAuth.getInstance().signOut();
+            }
+        }.execute();
     }
 
+    public void getToken(){
+        new AsyncTasks() {
+            @Override
+            public void doInBackground() {
+                FirebaseMessaging.getInstance().getToken().addOnSuccessListener(AuthRepository.this::updateToken);
+            }
 
+            @Override
+            public void onPostExecute() {
+
+            }
+        }.execute();
+    }
+
+    public void updateToken(String token){
+        new AsyncTasks() {
+            @Override
+            public void doInBackground() {
+                database
+                        .collection(Constants.KEY_COLLECTION_USERS)
+                        .document(preferenceManager.getString(Constants.KEY_USER_ID))
+                        .update(Constants.KEY_FCM_TOKEN, token);
+            }
+
+            @Override
+            public void onPostExecute() {
+
+            }
+        }.execute();
+    }
+
+    public void updateUserActivity(int value) {
+        database
+                .collection(Constants.KEY_COLLECTION_USERS).document(
+                        preferenceManager.getString(Constants.KEY_USER_ID)
+                ).update(Constants.KEY_AVAILABILITY, value);
+
+    }
 
 }

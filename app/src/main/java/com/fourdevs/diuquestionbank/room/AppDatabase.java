@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 
 @Database(entities = {Course.class, User.class},version = 1,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
-
+    //need to implement Migrating Room database class after the version update.
     private static volatile AppDatabase INSTANCE;
     public abstract QuestionsDao questionsDao();
     public abstract UserDao userDao();

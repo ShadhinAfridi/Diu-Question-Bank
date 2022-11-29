@@ -39,11 +39,12 @@
             android:textSize="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/_60sdp"
             android:padding="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:letterSpacing="0.2"
+            android:textAlignment="center"
             />
 
         <View

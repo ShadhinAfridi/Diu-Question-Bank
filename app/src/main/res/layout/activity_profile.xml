@@ -113,7 +113,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/background_image"
                     android:src="@drawable/ic_person"
                     />
 

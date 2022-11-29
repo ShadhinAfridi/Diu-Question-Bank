@@ -5,45 +5,26 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.fourdevs.diuquestionbank.authentication.LoginActivity;
-import com.fourdevs.diuquestionbank.utilities.Constants;
-import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
+import com.fourdevs.diuquestionbank.viewmodel.AuthViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.messaging.FirebaseMessaging;
-
-import java.util.HashMap;
 
 public class BaseActivity extends AppCompatActivity {
-    private DocumentReference documentReference;
-    private PreferenceManager preferenceManager;
+    private AuthViewModel authViewModel;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferenceManager= new PreferenceManager(getApplicationContext());
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        documentReference = database.collection(Constants.KEY_COLLECTION_USERS)
-                .document(preferenceManager.getString(Constants.KEY_USER_ID));
-        getToken();
+        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
+        authViewModel.getToken();
     }
 
-    public void getToken(){
-        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
-    }
-
-    public void updateToken(String token){
-        documentReference.update(Constants.KEY_FCM_TOKEN, token);
-    }
 
     public boolean isInternetAvailable() {
         ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -60,18 +41,13 @@ public class BaseActivity extends AppCompatActivity {
                         }
                     });
         } else {
-            preferenceManager.clear();
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            finish();
+            logOut();
         }
     }
     private void logOut() {
-        HashMap<String, Object> updates = new HashMap<>();
-        updates.put(Constants.KEY_FCM_TOKEN, FieldValue.delete());
-        documentReference.update(updates)
+        authViewModel.deleteFcmToken()
                 .addOnSuccessListener(unused -> {
-                    FirebaseAuth.getInstance().signOut();
-                    preferenceManager.clear();
+                    authViewModel.logOut();
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     finish();
                 });
@@ -80,7 +56,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        documentReference.update(Constants.KEY_AVAILABILITY, 0);
+        authViewModel.updateUserActivity(0);
     }
 
     @Override
@@ -88,7 +64,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onResume();
         if(isInternetAvailable()){
             checkCurrentUser();
-            documentReference.update(Constants.KEY_AVAILABILITY, 1);
+            authViewModel.updateUserActivity(1);
         }
     }
 }

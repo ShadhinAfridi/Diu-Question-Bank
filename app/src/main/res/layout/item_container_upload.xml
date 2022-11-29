@@ -6,7 +6,7 @@
     app:cardUseCompatPadding="true"
     style="@style/BackgroundList"
     app:cardCornerRadius="@dimen/_5sdp"
-    app:cardElevation="@dimen/_5sdp"
+    app:cardElevation="@dimen/_2sdp"
     app:cardPreventCornerOverlap="true"
     >
     <androidx.constraintlayout.widget.ConstraintLayout

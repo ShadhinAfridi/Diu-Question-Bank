@@ -106,8 +106,6 @@ public class PdfViewerActivity extends BaseActivity {
 
         for(int i=0; i<numberOfPage; i++){
             PdfRenderer.Page rendererPage = pdfRenderer.openPage(i);
-            //int rendererPageWidth = rendererPage.getWidth()*2;
-            //int rendererPageHeight = rendererPage.getHeight()*2;
             Bitmap bitmap = Bitmap.createBitmap(
                     metrics.widthPixels,
                     metrics.heightPixels,
@@ -117,12 +115,12 @@ public class PdfViewerActivity extends BaseActivity {
             list.add(bitmap);
             rendererPage.close();
         }
+        pdfRenderer.close();
         if(list.size() > 0){
             PdfAdapter pdfAdapter = new PdfAdapter(list);
             binding.pdfRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             binding.pdfRecyclerView.setAdapter(pdfAdapter);
         }
-        pdfRenderer.close();
     }
 
     private void loading(Boolean isLoading){

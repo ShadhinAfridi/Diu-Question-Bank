@@ -23,8 +23,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profileImage"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
@@ -33,7 +33,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
             android:scaleType="centerCrop"
-            android:background="@drawable/background_image"
+            android:background="@drawable/background_round_shape"
             android:src="@drawable/ic_person"
             />
 
@@ -139,7 +139,6 @@
             app:cardUseCompatPadding="true"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_2sdp"
-            app:cardBackgroundColor="@android:color/white"
             app:cardPreventCornerOverlap="true"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -180,7 +179,7 @@
         </com.google.android.material.card.MaterialCardView>
 
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardUpload"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -188,7 +187,6 @@
             app:cardUseCompatPadding="true"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_2sdp"
-            app:cardBackgroundColor="@android:color/white"
             app:cardPreventCornerOverlap="true"
 
             >
@@ -226,9 +224,9 @@
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardNotice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -236,7 +234,6 @@
             app:cardUseCompatPadding="true"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_2sdp"
-            app:cardBackgroundColor="@android:color/white"
             app:cardPreventCornerOverlap="true"
 
             >
@@ -274,7 +271,7 @@
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
     <LinearLayout
@@ -290,7 +287,7 @@
         android:gravity="center_horizontal"
         >
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardReward"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -298,7 +295,6 @@
             app:cardUseCompatPadding="true"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_2sdp"
-            app:cardBackgroundColor="@android:color/white"
             app:cardPreventCornerOverlap="true"
 
             >
@@ -336,9 +332,9 @@
                     app:layout_constraintTop_toBottomOf="@id/imageReward" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardHelp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -346,7 +342,6 @@
             app:cardUseCompatPadding="true"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_2sdp"
-            app:cardBackgroundColor="@android:color/white"
             app:cardPreventCornerOverlap="true"
 
             >
@@ -384,7 +379,7 @@
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
