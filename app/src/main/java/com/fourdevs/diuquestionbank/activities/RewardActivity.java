@@ -3,8 +3,11 @@ package com.fourdevs.diuquestionbank.activities;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 
 import com.fourdevs.diuquestionbank.databinding.ActivityRewardBinding;
@@ -24,9 +27,19 @@ import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 @SuppressLint("SetTextI18n")
 public class RewardActivity extends Activity {
     private static final String AD_UNIT_ID = "ca-app-pub-2590640247128409/7451059816";
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "RewardActivity";
+    private static final long COUNTER_TIME = 10;
+    private static final int GAME_OVER_REWARD = 1;
+
+    private int coinCount;
+    private CountDownTimer countDownTimer;
+    private boolean gameOver;
+    private boolean gamePaused;
+
     private RewardedAd rewardedAd;
+    private long timeRemaining;
     boolean isLoading;
+
     private ActivityRewardBinding binding;
 
     @Override
@@ -34,26 +47,55 @@ public class RewardActivity extends Activity {
         super.onCreate(savedInstanceState);
         binding = ActivityRewardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setAds();
 
         // Log the Mobile Ads SDK version.
         Log.d(TAG, "Google Mobile Ads SDK Version: " + MobileAds.getVersion());
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
-            }
+        MobileAds.initialize(this, initializationStatus -> {
         });
 
         loadRewardedAd();
-        binding.showVideoButton.setOnClickListener(view -> showRewardedVideo());
-        binding.iconBack.setOnClickListener(view -> {
-            onBackPressed();
-            finish();
-        });
 
+        // Create the "retry" button, which tries to show a rewarded ad between game plays.
+        binding.retryButton.setVisibility(View.INVISIBLE);
+        binding.retryButton.setOnClickListener(view -> startGame());
+
+        // Create the "show" button, which shows a rewarded video if one is loaded.
+        binding.showVideoButton.setOnClickListener( view -> showRewardedVideo());
+
+        // Display current coin count to user.
+        coinCount = 0;
+        binding.coinCountText.setText("Coins: " + coinCount);
+
+        startGame();
+        setListeners();
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        pauseGame();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!gameOver && gamePaused) {
+            resumeGame();
+        }
+    }
+
+    private void pauseGame() {
+        countDownTimer.cancel();
+        gamePaused = true;
+    }
+
+    private void resumeGame() {
+        createTimer(timeRemaining);
+        gamePaused = false;
+    }
 
     private void loadRewardedAd() {
         if (rewardedAd == null) {
@@ -70,7 +112,7 @@ public class RewardActivity extends Activity {
                             Log.d(TAG, loadAdError.getMessage());
                             rewardedAd = null;
                             RewardActivity.this.isLoading = false;
-                            Toast.makeText(RewardActivity.this, loadAdError.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(RewardActivity.this, "onAdFailedToLoad", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -84,6 +126,50 @@ public class RewardActivity extends Activity {
         }
     }
 
+    private void addCoins(int coins) {
+        coinCount += coins;
+        binding.coinCountText.setText("Coins: " + coinCount);
+    }
+
+    private void startGame() {
+        // Hide the retry button, load the ad, and start the timer.
+        binding.retryButton.setVisibility(View.INVISIBLE);
+        if (rewardedAd != null && !isLoading) {
+            loadRewardedAd();
+        }
+        createTimer(COUNTER_TIME);
+        gamePaused = false;
+        gameOver = false;
+    }
+
+    // Create the game timer, which counts down to the end of the level
+    // and shows the "retry" button.
+    private void createTimer(long time) {
+
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+        countDownTimer =
+                new CountDownTimer(time * 1000, 50) {
+                    @Override
+                    public void onTick(long millisUnitFinished) {
+                        timeRemaining = ((millisUnitFinished / 1000) + 1);
+                        binding.timer.setText("seconds remaining: " + timeRemaining);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        if (rewardedAd != null) {
+                            binding.showVideoButton.setVisibility(View.VISIBLE);
+                        }
+                        binding.timer.setText("You Lose!");
+                        addCoins(GAME_OVER_REWARD);
+                        binding.retryButton.setVisibility(View.VISIBLE);
+                        gameOver = true;
+                    }
+                };
+        countDownTimer.start();
+    }
 
     private void showRewardedVideo() {
 
@@ -130,17 +216,71 @@ public class RewardActivity extends Activity {
         Activity activityContext = RewardActivity.this;
         rewardedAd.show(
                 activityContext,
-                new OnUserEarnedRewardListener() {
-                    @Override
-                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                        // Handle the reward.
-                        Log.d("TAG", "The user earned the reward.");
-                        int rewardAmount = rewardItem.getAmount();
-                        String rewardType = rewardItem.getType();
-                        Toast.makeText(activityContext, "You earned "+rewardAmount+" point", Toast.LENGTH_SHORT).show();
-                    }
+                rewardItem -> {
+                    // Handle the reward.
+                    Log.d("TAG", "The user earned the reward.");
+                    int rewardAmount = rewardItem.getAmount();
+                    String rewardType = rewardItem.getType();
+
+                    Log.d("Afiridi", rewardType+"="+rewardAmount);
                 });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void setListeners() {
+        binding.showVideoButton.setOnClickListener(view ->{
+
+        });
+
+        binding.iconBack.setOnClickListener(view -> {
+            onBackPressed();
+            finish();
+        });
+    }
+
+    private void setAds() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
+        loadAd();
+    }
+
+    private void loadAd() {
+
+    }
+
+
+
+
+
 }
 
 

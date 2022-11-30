@@ -20,6 +20,7 @@ import com.fourdevs.diuquestionbank.databinding.DialogueChangePasswordBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
 import com.fourdevs.diuquestionbank.viewmodel.MainViewModel;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -48,6 +49,7 @@ public class MainActivity extends BaseActivity {
         }
         setUserData();
         setListeners();
+        setAds();
     }
 
     private void setUserData() {
@@ -87,10 +89,8 @@ public class MainActivity extends BaseActivity {
         });
 
         binding.cardReward.setOnClickListener(view -> {
-            //Intent intent = new Intent(MainActivity.this, RewardActivity.class);
-            //startActivity(intent);
-            Toast.makeText(this, "Coming Soon....", Toast.LENGTH_SHORT).show();
-
+            Intent intent = new Intent(MainActivity.this, RewardActivity.class);
+            startActivity(intent);
         });
         binding.cardHelp.setOnClickListener(view -> {
             Intent helpIntent = new Intent(MainActivity.this, HelpActivity.class);
@@ -135,6 +135,11 @@ public class MainActivity extends BaseActivity {
 
     private void makeToast(String message) {
         Toast.makeText(getApplicationContext(),message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setAds() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
     }
 
     @Override
