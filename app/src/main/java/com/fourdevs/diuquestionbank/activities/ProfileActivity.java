@@ -35,11 +35,11 @@ import com.fourdevs.diuquestionbank.viewmodel.AuthViewModel;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProfileActivity extends BaseActivity implements CourseListener {
     private ActivityProfileBinding binding;
     private PreferenceManager preferenceManager;
-    private int pendingCount = 0, approveCount = 0, rejectCount = 0;
     private AuthViewModel authViewModel;
 
 
@@ -165,6 +165,9 @@ public class ProfileActivity extends BaseActivity implements CourseListener {
     }
 
     private void getUploadCourses() {
+        AtomicInteger pendingCount = new AtomicInteger();
+        AtomicInteger approveCount = new AtomicInteger();
+        AtomicInteger rejectCount = new AtomicInteger();
         binding.uploadRecyclerProgress.setVisibility(View.VISIBLE);
         UpdateAdapter updateAdapter = new UpdateAdapter(new CourseDiff(),this);
         binding.uploadRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -183,16 +186,16 @@ public class ProfileActivity extends BaseActivity implements CourseListener {
                 binding.uploadCount.setText(String.valueOf(it.size()));
                 if(course.approved!=null) {
                     if(course.approved) {
-                        approveCount+=1;
+                        approveCount.addAndGet(1);
                     } else {
-                        pendingCount+=1;
+                        pendingCount.addAndGet(1);
                     }
                 } else {
-                    rejectCount+=1;
+                    rejectCount.addAndGet(1);
                 }
-                binding.approvedCount.setText(String.valueOf(approveCount));
-                binding.pendingCount.setText(String.valueOf(pendingCount));
-                binding.rejectedCount.setText(String.valueOf(rejectCount));
+                binding.approvedCount.setText(String.valueOf(approveCount.get()));
+                binding.pendingCount.setText(String.valueOf(pendingCount.get()));
+                binding.rejectedCount.setText(String.valueOf(rejectCount.get()));
             }
         });
     }

@@ -27,19 +27,9 @@ import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 @SuppressLint("SetTextI18n")
 public class RewardActivity extends Activity {
     private static final String AD_UNIT_ID = "ca-app-pub-2590640247128409/7451059816";
-    private static final String TAG = "RewardActivity";
-    private static final long COUNTER_TIME = 10;
-    private static final int GAME_OVER_REWARD = 1;
-
-    private int coinCount;
-    private CountDownTimer countDownTimer;
-    private boolean gameOver;
-    private boolean gamePaused;
-
+    private static final String TAG = "Afridi";
     private RewardedAd rewardedAd;
-    private long timeRemaining;
     boolean isLoading;
-
     private ActivityRewardBinding binding;
 
     @Override
@@ -49,53 +39,16 @@ public class RewardActivity extends Activity {
         setContentView(binding.getRoot());
         setAds();
 
-        // Log the Mobile Ads SDK version.
-        Log.d(TAG, "Google Mobile Ads SDK Version: " + MobileAds.getVersion());
-
         MobileAds.initialize(this, initializationStatus -> {
         });
 
         loadRewardedAd();
 
-        // Create the "retry" button, which tries to show a rewarded ad between game plays.
-        binding.retryButton.setVisibility(View.INVISIBLE);
-        binding.retryButton.setOnClickListener(view -> startGame());
-
-        // Create the "show" button, which shows a rewarded video if one is loaded.
-        binding.showVideoButton.setOnClickListener( view -> showRewardedVideo());
-
-        // Display current coin count to user.
-        coinCount = 0;
-        binding.coinCountText.setText("Coins: " + coinCount);
-
-        startGame();
         setListeners();
 
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        pauseGame();
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (!gameOver && gamePaused) {
-            resumeGame();
-        }
-    }
-
-    private void pauseGame() {
-        countDownTimer.cancel();
-        gamePaused = true;
-    }
-
-    private void resumeGame() {
-        createTimer(timeRemaining);
-        gamePaused = false;
-    }
 
     private void loadRewardedAd() {
         if (rewardedAd == null) {
@@ -109,7 +62,7 @@ public class RewardActivity extends Activity {
                         @Override
                         public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                             // Handle the error.
-                            Log.d(TAG, loadAdError.getMessage());
+                            Log.d(TAG, "Error " +loadAdError.getMessage());
                             rewardedAd = null;
                             RewardActivity.this.isLoading = false;
                             Toast.makeText(RewardActivity.this, "onAdFailedToLoad", Toast.LENGTH_SHORT).show();
@@ -126,50 +79,6 @@ public class RewardActivity extends Activity {
         }
     }
 
-    private void addCoins(int coins) {
-        coinCount += coins;
-        binding.coinCountText.setText("Coins: " + coinCount);
-    }
-
-    private void startGame() {
-        // Hide the retry button, load the ad, and start the timer.
-        binding.retryButton.setVisibility(View.INVISIBLE);
-        if (rewardedAd != null && !isLoading) {
-            loadRewardedAd();
-        }
-        createTimer(COUNTER_TIME);
-        gamePaused = false;
-        gameOver = false;
-    }
-
-    // Create the game timer, which counts down to the end of the level
-    // and shows the "retry" button.
-    private void createTimer(long time) {
-
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
-        countDownTimer =
-                new CountDownTimer(time * 1000, 50) {
-                    @Override
-                    public void onTick(long millisUnitFinished) {
-                        timeRemaining = ((millisUnitFinished / 1000) + 1);
-                        binding.timer.setText("seconds remaining: " + timeRemaining);
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        if (rewardedAd != null) {
-                            binding.showVideoButton.setVisibility(View.VISIBLE);
-                        }
-                        binding.timer.setText("You Lose!");
-                        addCoins(GAME_OVER_REWARD);
-                        binding.retryButton.setVisibility(View.VISIBLE);
-                        gameOver = true;
-                    }
-                };
-        countDownTimer.start();
-    }
 
     private void showRewardedVideo() {
 
@@ -258,7 +167,7 @@ public class RewardActivity extends Activity {
 
     private void setListeners() {
         binding.showVideoButton.setOnClickListener(view ->{
-
+            showRewardedVideo();
         });
 
         binding.iconBack.setOnClickListener(view -> {
