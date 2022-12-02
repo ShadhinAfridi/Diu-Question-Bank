@@ -68,11 +68,11 @@
             android:textSize="@dimen/_9ssp"
             app:layout_constraintStart_toStartOf="@id/courseCode"
             app:layout_constraintTop_toBottomOf="@id/courseCode"
-            app:layout_constraintEnd_toStartOf="@id/status"
+            app:layout_constraintEnd_toStartOf="@id/statusApproved"
             />
 
         <TextView
-            android:id="@+id/status"
+            android:id="@+id/statusApproved"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="viewEnd"
@@ -83,6 +83,42 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:textStyle="bold"
             android:textAllCaps="true"
+            android:text="@string/approved"
+            android:visibility="invisible"
             />
+
+        <TextView
+            android:id="@+id/statusPending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintStart_toEndOf="@id/department"
+            app:layout_constraintTop_toBottomOf="@id/courseCode"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:text="@string/pending"
+            android:visibility="invisible"
+            />
+
+        <TextView
+            android:id="@+id/statusRejected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintStart_toEndOf="@id/department"
+            app:layout_constraintTop_toBottomOf="@id/courseCode"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:text="@string/rejected"
+            android:visibility="invisible"
+            />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -11,6 +11,7 @@
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/background_login.xml" value="0.208" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/background_login_signup_color.xml" value="0.208" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/background_login_signup_color_white.xml" value="0.208" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/background_main.xml" value="0.23" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/background_main_activity.xml" value="0.208" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/background_main_page.xml" value="0.208" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/background_pentagon.xml" value="0.208" />
@@ -55,13 +56,16 @@
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/ic_schedule.xml" value="0.2085" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/ic_search.xml" value="0.2085" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/ic_semester.xml" value="0.2085" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/ic_settings.xml" value="0.212" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/ic_shield.xml" value="0.208" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/ic_upload.xml" value="0.208" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/ic_visibility.xml" value="0.208" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/ic_visibility_off.xml" value="0.2085" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/quiz-48px.xml" value="0.208" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/round_design_shape.xml" value="0.208" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/round_design_shape_yellow.xml" value="0.212" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/side_nav_bar.xml" value="0.2085" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/side_slide.xml" value="0.212" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/drawable/style_half_shape.xml" value="0.208" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout-v28/activity_main.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/activity_courses.xml" value="0.3625" />
@@ -79,17 +83,23 @@
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/activity_reward.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/activity_schedule.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/activity_signup.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/activity_splash_screen.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/activity_verifiacation.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/activity_verification.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/activity_welcome.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/content_home.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/dialogue_change_password.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/dialouge_uploader_info.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/item_container_courses.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/item_container_department.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/item_container_notification.xml" value="0.35038363171355497" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/item_container_upload.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/item_notification.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/itme_container_pdf.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/nav_header_main.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/notification.xml" value="0.33" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/progress.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/layout/side_slide.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/menu-v26/second_menu.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/menu/main_menu.xml" value="0.3625" />
         <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBank/app/src/main/res/menu/navigation_menu.xml" value="0.14722222222222223" />

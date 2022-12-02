@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -58,14 +59,12 @@ public class UpdateAdapter extends ListAdapter<Course,UpdateAdapter.CourseViewHo
             binding.semesterName.setText(course.semester +" "+course.year);
             if(course.approved != null) {
                 if(course.approved) {
-                    binding.status.setText("Approved");
+                    binding.statusApproved.setVisibility(View.VISIBLE);
                 } else {
-                    binding.status.setText("Pending");
-                    binding.status.setTextColor(R.color.primary);
+                    binding.statusPending.setVisibility(View.VISIBLE);
                 }
             } else {
-                binding.status.setText("Rejected");
-                binding.status.setTextColor(Color.RED);
+                binding.statusRejected.setVisibility(View.VISIBLE);
             }
 
         }
