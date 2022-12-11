@@ -25,7 +25,7 @@ import com.fourdevs.diuquestionbank.viewmodel.CourseViewModel;
 public class CoursesActivity extends BaseActivity implements CourseListener {
 
     private ActivityCoursesBinding binding;
-    private String departmentName;
+    private String departmentName, examName;
     private CourseViewModel courseViewModel;
     private CourseAdapter courseAdapter;
 
@@ -36,7 +36,8 @@ public class CoursesActivity extends BaseActivity implements CourseListener {
         setContentView(binding.getRoot());
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
         Intent intent = getIntent();
-        departmentName = intent.getStringExtra("departmentName");
+        departmentName = intent.getStringExtra(Constants.KEY_DEPARTMENT);
+        examName = intent.getStringExtra(Constants.KEY_EXAM);
         setListeners();
         setAdapter();
     }
@@ -46,10 +47,13 @@ public class CoursesActivity extends BaseActivity implements CourseListener {
         courseAdapter = new CourseAdapter(new CourseDiff(),this,this);
         binding.courseRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         binding.courseRecyclerView.setAdapter(courseAdapter);
-        courseViewModel.getCourse(departmentName).observe(this, it->{
+        courseViewModel.getCourse(departmentName, examName).observe(this, it->{
             courseAdapter.submitList(it);
+            binding.courseProgressBar.setVisibility(View.GONE);
             if(it.size()>0) {
-                binding.courseProgressBar.setVisibility(View.GONE);
+                binding.nothingFound.setVisibility(View.GONE);
+            } else {
+                binding.nothingFound.setVisibility(View.VISIBLE);
             }
         });
     }

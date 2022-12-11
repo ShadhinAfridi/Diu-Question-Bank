@@ -46,4 +46,9 @@ public class Constants {
     public static final String KEY_APPROVE_COUNT = "approve_count";
     public static final String KEY_REJECT_COUNT = "reject_count";
 
+    //Rewards
+    public static final String KEY_COLLECTION_REWARD = "rewards";
+    public static final String KEY_REWARD_POINTS = "rewardPoints";
+
+
 }

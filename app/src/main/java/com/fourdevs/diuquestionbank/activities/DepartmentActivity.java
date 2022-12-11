@@ -12,6 +12,7 @@ import com.fourdevs.diuquestionbank.databinding.ActivityDepartmentBinding;
 import com.fourdevs.diuquestionbank.listeners.DepartmentListener;
 import com.fourdevs.diuquestionbank.models.Course;
 import com.fourdevs.diuquestionbank.utilities.AsyncTasks;
+import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.viewmodel.CourseViewModel;
 
 import java.util.ArrayList;
@@ -96,8 +97,8 @@ public class DepartmentActivity extends BaseActivity implements DepartmentListen
 
     @Override
     public void onDepartmentClicked(String department) {
-        Intent intent = new Intent(getApplicationContext(), CoursesActivity.class);
-        intent.putExtra("departmentName",department);
+        Intent intent = new Intent(getApplicationContext(), ExamNameActivity.class);
+        intent.putExtra(Constants.KEY_DEPARTMENT, department);
         startActivity(intent);
     }
 }

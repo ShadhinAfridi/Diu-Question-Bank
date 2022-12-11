@@ -31,27 +31,7 @@ public class BaseActivity extends AppCompatActivity {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null;
     }
-    private void checkCurrentUser() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user!=null) {
-            user.getIdToken(true)
-                    .addOnCompleteListener(task -> {
-                        if (!task.isSuccessful()) {
-                            logOut();
-                        }
-                    });
-        } else {
-            logOut();
-        }
-    }
-    private void logOut() {
-        authViewModel.deleteFcmToken()
-                .addOnSuccessListener(unused -> {
-                    authViewModel.logOut();
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    finish();
-                });
-    }
+
 
     @Override
     protected void onPause() {
@@ -63,7 +43,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if(isInternetAvailable()){
-            checkCurrentUser();
             authViewModel.updateUserActivity(1);
         }
     }

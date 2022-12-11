@@ -28,8 +28,8 @@ public interface QuestionsDao {
     @Query("DELETE FROM "+ Constants.KEY_COLLECTION_QUESTIONS)
     void DeleteAllCourse();
 
-    @Query("SELECT * FROM "+ Constants.KEY_COLLECTION_QUESTIONS +" where departmentName = :department and approved == 1 order by courseName")
-    LiveData<List<Course>> getCourses(String department);
+    @Query("SELECT * FROM "+ Constants.KEY_COLLECTION_QUESTIONS +" where departmentName = :department and exam = :exam and approved == 1 order by courseName")
+    LiveData<List<Course>> getCourses(String department, String exam);
 
     @Query("SELECT * FROM "+ Constants.KEY_COLLECTION_QUESTIONS+" where approved == 1 order by courseName")
     LiveData<List<Course>> getAllCourses();

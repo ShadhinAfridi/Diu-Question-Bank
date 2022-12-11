@@ -101,7 +101,7 @@
             android:paddingTop="@dimen/_5sdp"
             android:paddingEnd="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
-            android:textSize="@dimen/_10ssp"
+            android:textSize="@dimen/_13ssp"
             android:inputType="text"
             />
         <androidx.appcompat.widget.AppCompatImageView
@@ -151,7 +151,7 @@
             />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/nothingFound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"

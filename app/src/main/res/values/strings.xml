@@ -97,4 +97,10 @@
     <string name="date">Date :</string>
     <string name="name_">Name :</string>
     <string name="info">Info</string>
+    <string name="midterm">Midterm</string>
+    <string name="final_exam">Final</string>
+    <string name="your_earning">Your Earning</string>
+    <string name="earn_point">Earn point</string>
+    <string name="_5_points">5 points</string>
+    <string name="watch_video_and_earn_5_pints">Watch video and earn 5 pints</string>
 </resources>

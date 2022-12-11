@@ -52,58 +52,187 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/game_title"
+        android:id="@+id/pointCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Impossible Game"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/constraintLayout1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <TextView
-        android:id="@+id/timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/game_title"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/_0"
+        android:textStyle="bold"
+        android:textSize="@dimen/_20ssp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:padding="@dimen/_5sdp"
+        android:layout_marginVertical="@dimen/_18sdp"
         />
 
-    <Button
-        android:id="@+id/retry_button"
+    <TextView
+        android:id="@+id/earningText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@id/timer"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="retry" />
-
-    <Button
-        android:id="@+id/show_video_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/retry_button"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/watch_video_button_text" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pointCount"
+        android:text="@string/your_earning"
+        android:textColor="?android:attr/textColorSecondary"
+        />
 
     <TextView
-        android:id="@+id/coin_count_text"
+        android:id="@+id/earnPoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:text="coin"
-        app:layout_constraintBottom_toTopOf="@+id/adView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/earn_point"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/earningText"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:padding="@dimen/_10sdp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        android:textSize="@dimen/_12ssp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/earnPoint"
+        android:padding="@dimen/_5sdp"
+        android:orientation="vertical"
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/rewardOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="@dimen/_5sdp"
+            app:cardPreventCornerOverlap="true"
+            app:cardBackgroundColor="@color/primary"
+            >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:weightSum="100"
+                android:gravity="center_vertical"
+                android:baselineAligned="false">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_play_video"
+                    android:tint="@color/white"
+                    android:layout_weight="10"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="80"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="@string/watch_video_and_earn_5_pints"
+                    />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/rewardTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="@dimen/_5sdp"
+            app:cardPreventCornerOverlap="true"
+            app:cardBackgroundColor="@color/primary"
+            >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:weightSum="100"
+                android:gravity="center_vertical"
+                android:baselineAligned="false">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_play_video"
+                    android:tint="@color/white"
+                    android:layout_weight="10"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="80"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="@string/watch_video_and_earn_5_pints"
+                    />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/rewardThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="@dimen/_5sdp"
+            app:cardPreventCornerOverlap="true"
+            app:cardBackgroundColor="@color/primary"
+            >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:weightSum="100"
+                android:gravity="center_vertical"
+                android:baselineAligned="false">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_play_video"
+                    android:tint="@color/white"
+                    android:layout_weight="10"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="80"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="@string/watch_video_and_earn_5_pints"
+                    />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+    </LinearLayout>
 
 
     <com.google.android.gms.ads.AdView

@@ -25,8 +25,8 @@ public class CourseViewModel extends AndroidViewModel {
     public LiveData<List<Course>> getAllCourse() {
         return allCourse;
     }
-    public LiveData<List<Course>> getCourse(String department) {
-        return repository.getCourses(department);
+    public LiveData<List<Course>> getCourse(String department, String exam) {
+        return repository.getCourses(department, exam);
     }
     public LiveData<List<Course>> getSearchedCourse(String department, String courseCode) {
         return repository.getSearchedCourses(department, courseCode);

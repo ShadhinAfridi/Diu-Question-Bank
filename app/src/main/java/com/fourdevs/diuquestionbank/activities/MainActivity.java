@@ -1,7 +1,6 @@
 package com.fourdevs.diuquestionbank.activities;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.fourdevs.diuquestionbank.authentication.LoginActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivityMainBinding;
-import com.fourdevs.diuquestionbank.databinding.DialogueChangePasswordBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
 import com.fourdevs.diuquestionbank.viewmodel.MainViewModel;
@@ -89,17 +87,16 @@ public class MainActivity extends BaseActivity {
         });
 
         binding.cardReward.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, RewardActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(MainActivity.this, RewardActivity.class);
+//            startActivity(intent);
+            makeToast("Coming Soon....");
         });
         binding.cardHelp.setOnClickListener(view -> {
             Intent helpIntent = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(helpIntent);
         });
         binding.cardNotice.setOnClickListener(view -> {
-            //Intent noticeIntent = new Intent(MainActivity.this, NoticeActivity.class);
-            //startActivity(noticeIntent);
-            Toast.makeText(this, "Coming Soon....", Toast.LENGTH_SHORT).show();
+            makeToast("Coming Soon....");
         });
     }
 
@@ -150,4 +147,5 @@ public class MainActivity extends BaseActivity {
                 .setPositiveButton("Yes", (dialog, id) -> MainActivity.this.finish())
                 .setNegativeButton("No", (dialog, which) -> dialog.dismiss()).show();
     }
+
 }

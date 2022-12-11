@@ -1,17 +1,16 @@
 package com.fourdevs.diuquestionbank.adapter;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.fourdevs.diuquestionbank.databinding.ItemContainerDepartmentBinding;
 import com.fourdevs.diuquestionbank.listeners.DepartmentListener;
 import com.fourdevs.diuquestionbank.models.Course;
-
-import java.util.List;
 
 public class DepartmentAdapter extends ListAdapter<Course, DepartmentAdapter.DepartmentViewHolder> {
 

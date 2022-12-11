@@ -22,21 +22,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:theme="@style/Theme.DIUQuestionBank">
-
+        <activity
+            android:name=".activities.ExamNameActivity"
+            android:screenOrientation="locked"
+            android:exported="false" />
         <activity
             android:name=".authentication.VerificationActivity"
             android:exported="false"
-            android:screenOrientation="locked"/>
+            android:screenOrientation="locked" />
         <activity
             android:name=".activities.PrivacyPolicyActivity"
             android:exported="false"
-            android:screenOrientation="locked"/>
-
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2590640247128409~2390304821" />
-
+            android:screenOrientation="locked" />
         <activity
             android:name=".activities.RewardActivity"
             android:exported="false"
@@ -95,10 +94,13 @@
             android:screenOrientation="locked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2590640247128409~2390304821" />
 
         <service
             android:name=".utilities.NotificationReceiver"

@@ -137,7 +137,7 @@ public class QuestionUploadActivity extends BaseActivity {
     private void uploadPdf(Uri uri) {
         setDialog(true);
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        final StorageReference filepath = storageReference.child(department+"_"+courseCode+"_"+exam+"_"+semester+"_"+year+"."+"pdf");
+        final StorageReference filepath = storageReference.child(courseCode+"_"+exam+"_"+semester+"_"+year+"_"+preferenceManager.getString(Constants.KEY_USER_ID)+"."+"pdf");
         UploadTask uploadTask = filepath.putFile(uri);
 
         uploadTask.addOnProgressListener(snapshot -> {

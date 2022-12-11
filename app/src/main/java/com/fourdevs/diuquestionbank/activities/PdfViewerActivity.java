@@ -63,6 +63,7 @@ public class PdfViewerActivity extends BaseActivity {
         binding.imageInfo.setOnClickListener(view-> uploaderInfo());
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private void downloadActivity(){
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();

@@ -41,6 +41,7 @@ public class AuthRepository {
         AppDatabase appDatabase = AppDatabase.getDatabase(application);
         questionsDao = appDatabase.questionsDao();
         userDao = appDatabase.userDao();
+
     }
 
     public Task<Void> checkCurrentPassword(String currentPassword) {
@@ -91,10 +92,6 @@ public class AuthRepository {
 
     public Task<Void> addSignUpToDb(HashMap<String, Object> user, String userId) {
         return database.collection(Constants.KEY_COLLECTION_USERS).document(userId).set(user);
-    }
-
-    public FirebaseUser getCurrentUser() {
-        return user;
     }
 
     public Task<Void> updateUserName(String userName) {
@@ -175,11 +172,12 @@ public class AuthRepository {
     }
 
     public void updateUserActivity(int value) {
-        database
-                .collection(Constants.KEY_COLLECTION_USERS).document(
-                        preferenceManager.getString(Constants.KEY_USER_ID)
-                ).update(Constants.KEY_AVAILABILITY, value);
-
+        String userId = preferenceManager.getString(Constants.KEY_USER_ID);
+        if(userId != null) {
+            database.collection(Constants.KEY_COLLECTION_USERS).document(
+                    preferenceManager.getString(Constants.KEY_USER_ID)
+            ).update(Constants.KEY_AVAILABILITY, value);
+        }
     }
 
 }

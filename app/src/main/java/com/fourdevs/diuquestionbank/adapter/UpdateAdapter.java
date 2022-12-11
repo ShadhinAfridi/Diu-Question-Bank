@@ -1,21 +1,18 @@
 package com.fourdevs.diuquestionbank.adapter;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fourdevs.diuquestionbank.R;
 import com.fourdevs.diuquestionbank.databinding.ItemContainerUploadBinding;
 import com.fourdevs.diuquestionbank.listeners.CourseListener;
 import com.fourdevs.diuquestionbank.models.Course;
-import java.util.List;
 
 public class UpdateAdapter extends ListAdapter<Course,UpdateAdapter.CourseViewHolder> {
 
@@ -60,12 +57,18 @@ public class UpdateAdapter extends ListAdapter<Course,UpdateAdapter.CourseViewHo
             if(course.approved != null) {
                 if(course.approved) {
                     binding.statusApproved.setVisibility(View.VISIBLE);
+                    binding.statusPending.setVisibility(View.INVISIBLE);
                 } else {
                     binding.statusPending.setVisibility(View.VISIBLE);
+                    binding.statusApproved.setVisibility(View.INVISIBLE);
                 }
+                binding.statusRejected.setVisibility(View.INVISIBLE);
             } else {
+                binding.statusApproved.setVisibility(View.INVISIBLE);
+                binding.statusPending.setVisibility(View.INVISIBLE);
                 binding.statusRejected.setVisibility(View.VISIBLE);
             }
+            binding.uploadDate.setText(course.dateTime);
 
         }
     }

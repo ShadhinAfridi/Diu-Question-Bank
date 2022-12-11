@@ -33,8 +33,8 @@ public class CourseRepository {
     public LiveData<List<Course>> getAllCourses() {
         return allCourses;
     }
-    public LiveData<List<Course>> getCourses(String department) {
-        return questionsDao.getCourses(department);
+    public LiveData<List<Course>> getCourses(String department, String exam) {
+        return questionsDao.getCourses(department, exam);
     }
     public LiveData<List<Course>> getSearchedCourses(String department, String courseCode) {
         return questionsDao.getSearchedCourses(department, courseCode);
@@ -56,7 +56,7 @@ public class CourseRepository {
         database.collection(Constants.KEY_COLLECTION_QUESTIONS)
                 .whereEqualTo(Constants.KEY_IS_APPROVED, true)
                 .get()
-                .addOnCompleteListener(this::getDataInsert);
+                .addOnCompleteListener(this::getDataUpdate);
     }
 
     public void networkUserCourse(String userId) {
@@ -67,11 +67,6 @@ public class CourseRepository {
                 .addOnCompleteListener(this::getDataUpdate);
     }
 
-    private void getDataInsert(Task<QuerySnapshot> task) {
-        for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-            this.insert(arrangeData(queryDocumentSnapshot));
-        }
-    }
 
     private void getDataUpdate(Task<QuerySnapshot> task) {
         for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
@@ -98,6 +93,6 @@ public class CourseRepository {
 
 
     private String getReadableDateTime(Date date) {
-        return new SimpleDateFormat("MMMM dd, yyyy- hh:mm a", Locale.getDefault()).format(date);
+        return new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(date);
     }
 }
