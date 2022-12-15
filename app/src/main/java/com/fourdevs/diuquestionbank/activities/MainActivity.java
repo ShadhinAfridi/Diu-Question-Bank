@@ -1,6 +1,7 @@
 package com.fourdevs.diuquestionbank.activities;
 
 import android.Manifest;
+import android.app.Application;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -40,7 +41,6 @@ public class MainActivity extends BaseActivity {
             Task<QuerySnapshot> querySnapshotTask = viewModel.updateUserData();
             querySnapshotTask.addOnSuccessListener(queryDocumentSnapshots -> setUserData())
                     .addOnFailureListener(e -> Log.d("DIU Update Data", e.getMessage()));
-
         }
         if(!checkPermissions()) {
             askPermission();
@@ -87,8 +87,8 @@ public class MainActivity extends BaseActivity {
         });
 
         binding.cardReward.setOnClickListener(view -> {
-//            Intent intent = new Intent(MainActivity.this, RewardActivity.class);
-//            startActivity(intent);
+            //Intent intent = new Intent(MainActivity.this, RewardActivity.class);
+            //startActivity(intent);
             makeToast("Coming Soon....");
         });
         binding.cardHelp.setOnClickListener(view -> {
@@ -144,7 +144,10 @@ public class MainActivity extends BaseActivity {
         new AlertDialog.Builder(this)
                 .setMessage("Are you sure you want to exit?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", (dialog, id) -> MainActivity.this.finish())
+                .setPositiveButton("Yes", (dialog, id) -> {
+                    MainActivity.this.finish();
+                    System.exit(0);
+                })
                 .setNegativeButton("No", (dialog, which) -> dialog.dismiss()).show();
     }
 

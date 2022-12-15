@@ -28,9 +28,25 @@ public class HelpActivity extends BaseActivity {
     private void setListeners() {
         binding.iconBack.setOnClickListener(view -> onBackPressed());
         binding.buttonSend.setOnClickListener(view -> {
-            loading(true);
-            updateToDatabase();
+            checkInputData();
+
         });
+    }
+
+    private void checkInputData() {
+        String subject = binding.inputSubject.getText().toString().trim();
+        String message = binding.inputMessage.getText().toString().trim();
+
+        if(subject.isEmpty()) {
+            binding.inputSubject.setError("This field is required.");
+            binding.inputSubject.requestFocus();
+        } else if(message.isEmpty()) {
+            binding.inputMessage.setError("This field is required.");
+            binding.inputMessage.requestFocus();
+        } else {
+            loading(true);
+            updateToDatabase(subject, message);
+        }
     }
 
     private void setUserData() {
@@ -39,19 +55,19 @@ public class HelpActivity extends BaseActivity {
     }
 
 
-    private void updateToDatabase() {
+    private void updateToDatabase(String subject, String message) {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         HashMap<String, Object> contact = new HashMap<>();
         contact.put(Constants.KEY_USER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
-        contact.put(Constants.KEY_SUBJECT, binding.inputSubject.getText().toString().trim());
-        contact.put(Constants.KEY_MESSAGE, binding.inputMessage.getText().toString().trim());
+        contact.put(Constants.KEY_SUBJECT, subject);
+        contact.put(Constants.KEY_MESSAGE, message);
         contact.put(Constants.KEY_TIMESTAMP, new Date());
         database.collection(Constants.KEY_COLLECTION_CONTACTS)
                 .add(contact)
                 .addOnCompleteListener(task -> {
                     loading(false);
                     clearForm();
-                    makeToast("Sent");
+                    makeToast("Sent...");
                 }).addOnFailureListener(e -> makeToast(e.getMessage()));
     }
 

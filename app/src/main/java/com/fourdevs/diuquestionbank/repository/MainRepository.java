@@ -33,9 +33,6 @@ public class MainRepository {
                         preferenceManager.putSting(Constants.KEY_USER_ID, documentSnapshot.getString(Constants.KEY_USER_ID));
                         preferenceManager.putSting(Constants.KEY_NAME, documentSnapshot.getString(Constants.KEY_NAME));
                         preferenceManager.putSting(Constants.KEY_PROFILE_PICTURE, documentSnapshot.getString(Constants.KEY_PROFILE_PICTURE));
-                        preferenceManager.putSting(Constants.KEY_COUNT_APPROVED, documentSnapshot.getString(Constants.KEY_COUNT_APPROVED));
-                        preferenceManager.putSting(Constants.KEY_COUNT_REJECTED, documentSnapshot.getString(Constants.KEY_COUNT_REJECTED));
-                        preferenceManager.putSting(Constants.KEY_COUNT_UPLOAD, documentSnapshot.getString(Constants.KEY_COUNT_UPLOAD));
                         preferenceManager.putBoolean(Constants.KEY_READ_ONCE, true);
                     }
                 });

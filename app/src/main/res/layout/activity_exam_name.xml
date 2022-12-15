@@ -31,7 +31,7 @@
             />
 
         <TextView
-            android:id="@+id/titleDepartment"
+            android:id="@+id/textDepartment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
@@ -42,7 +42,6 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            android:text="@string/exam"
             app:layout_constraintBottom_toBottomOf="@id/iconBack"
             app:layout_constraintEnd_toStartOf="@id/iconInfo"
             app:layout_constraintStart_toEndOf="@id/iconBack"
@@ -176,18 +175,19 @@
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textDepartment"
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
-        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        android:layout_gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout"
-        android:textSize="@dimen/_12sdp"
-        android:textColor="?android:attr/textColorPrimary"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        ads:adUnitId="ca-app-pub-2590640247128409/9051492038"/>
 
 
 

@@ -74,7 +74,6 @@
     <string name="department_of">Department of</string>
     <string name="reward">Reward</string>
 
-    <string name="watch_video_button_text">Ads</string>
     <string name="forgotten_password">Forgotten password?</string>
     <string name="by_signing_up_you_agree_to_our">By signing up, you agree to our</string>
     <string name="terms_privacy_policy"><![CDATA[Terms & Privacy Policy]]></string>
@@ -101,6 +100,7 @@
     <string name="final_exam">Final</string>
     <string name="your_earning">Your Earning</string>
     <string name="earn_point">Earn point</string>
-    <string name="_5_points">5 points</string>
     <string name="watch_video_and_earn_5_pints">Watch video and earn 5 pints</string>
+    <string name="feedback">Feedback</string>
+    <string name="feedback_text">Please leave your suggestion and feedback for us to improve.</string>
 </resources>

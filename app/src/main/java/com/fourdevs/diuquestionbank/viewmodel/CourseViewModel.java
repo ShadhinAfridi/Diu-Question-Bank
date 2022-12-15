@@ -32,8 +32,8 @@ public class CourseViewModel extends AndroidViewModel {
         return repository.getSearchedCourses(department, courseCode);
     }
 
-    public void networkCourse() {
-        repository.networkCourse();
+    public void networkCourse(String department, String exam) {
+        repository.networkCourse(department, exam);
     }
 
 }

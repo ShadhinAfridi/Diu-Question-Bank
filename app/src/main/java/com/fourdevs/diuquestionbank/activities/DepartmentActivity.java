@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import com.fourdevs.diuquestionbank.R;
 import com.fourdevs.diuquestionbank.adapter.CourseDiff;
 import com.fourdevs.diuquestionbank.adapter.DepartmentAdapter;
 import com.fourdevs.diuquestionbank.databinding.ActivityDepartmentBinding;
@@ -23,7 +24,6 @@ import java.util.Set;
 
 public class DepartmentActivity extends BaseActivity implements DepartmentListener{
     private ActivityDepartmentBinding binding;
-    private CourseViewModel courseViewModel;
     private DepartmentAdapter departmentAdapter;
 
     @Override
@@ -31,57 +31,20 @@ public class DepartmentActivity extends BaseActivity implements DepartmentListen
         super.onCreate(savedInstanceState);
         binding = ActivityDepartmentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
-
-        callNetwork();
         setListeners();
         setAdapters();
         getData();
     }
 
-    private void callNetwork() {
-        binding.departmentProgressBar.setVisibility(View.VISIBLE);
-
-        new AsyncTasks() {
-            @Override
-            public void doInBackground() {
-                courseViewModel.networkCourse();
-            }
-
-            @Override
-            public void onPostExecute() {
-
-            }
-        }.execute();
-    }
-
     private void getData() {
-        courseViewModel.getAllCourse().observe(this, it->{
-            Course course;
-            List <String> departments = new ArrayList<>();
-            List<Course> courses = new ArrayList<>();
-
-            for(int i=0; i<it.size(); i++) {
-                course = it.get(i);
-                departments.add(course.departmentName);
-            }
-            Set<String> setDepartments = new HashSet<>(departments);
-            departments.clear();
-            departments.addAll(setDepartments);
-            Collections.sort(departments);
-
-            if(it.size()>0) {
-                binding.departmentProgressBar.setVisibility(View.GONE);
-            }
-
-            for(int i=0; i<departments.size(); i++) {
-                Course courseNew = new Course();
-                courseNew.departmentName = departments.get(i);
-                courses.add(courseNew);
-            }
-            departmentAdapter.submitList(courses);
-        });
-
+        List<Course> courses = new ArrayList<>();
+        String[] departmentArray = getResources().getStringArray(R.array.department_name);
+        for (String s : departmentArray) {
+            Course courseNew = new Course();
+            courseNew.departmentName = s;
+            courses.add(courseNew);
+        }
+        departmentAdapter.submitList(courses);
     }
 
     private void setAdapters() {
@@ -92,8 +55,6 @@ public class DepartmentActivity extends BaseActivity implements DepartmentListen
     private void setListeners() {
         binding.iconBack.setOnClickListener(view -> onBackPressed());
     }
-
-
 
     @Override
     public void onDepartmentClicked(String department) {

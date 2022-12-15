@@ -1,5 +1,6 @@
 package com.fourdevs.diuquestionbank.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.pdf.PdfRenderer;
@@ -50,7 +51,6 @@ public class PdfViewerActivity extends BaseActivity {
         courseLink = intent.getStringExtra(Constants.KEY_PDF_URL);
         uploadDate = intent.getStringExtra(Constants.KEY_UPLOAD_DATE);
         uploaderId = intent.getStringExtra(Constants.KEY_USER_ID);
-
         binding.textCourseName.setText(courseName);
         downloadActivity();
         setListener();
@@ -65,6 +65,8 @@ public class PdfViewerActivity extends BaseActivity {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private void downloadActivity(){
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.create();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference islandRef = storageRef.child(courseLink);
@@ -77,12 +79,18 @@ public class PdfViewerActivity extends BaseActivity {
             loading(false);
             displayPdf(localFile);
         } else {
-            islandRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+            islandRef.getFile(localFile).addOnProgressListener(snapshot -> {
+                double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+                progressDialog.setMessage("Loading... " + ((int) progress) + "%");
+                progressDialog.show();
+            }).addOnSuccessListener(taskSnapshot -> {
                 loading(false);
                 displayPdf(localFile);
+                progressDialog.dismiss();
             }).addOnFailureListener(exception ->{
-                Log.d("file not created", exception.getMessage());
+                Log.getStackTraceString(exception);
                 makeToast("Cannot open this file");
+                progressDialog.dismiss();
             } );
         }
     }
@@ -92,35 +100,41 @@ public class PdfViewerActivity extends BaseActivity {
         try {
             fileDescriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
         } catch (FileNotFoundException e) {
-            makeToast(e.getMessage());
+            e.printStackTrace();
         }
 
         try {
             pdfRenderer = new PdfRenderer(fileDescriptor);
 
         } catch (IOException e) {
-            makeToast(e.getMessage());
+            e.printStackTrace();
         }
 
-        int numberOfPage = pdfRenderer.getPageCount();
-        List<Bitmap> list = new ArrayList<>();
+        try{
 
-        for(int i=0; i<numberOfPage; i++){
-            PdfRenderer.Page rendererPage = pdfRenderer.openPage(i);
-            Bitmap bitmap = Bitmap.createBitmap(
-                    metrics.widthPixels,
-                    metrics.heightPixels,
-                    Bitmap.Config.ARGB_8888);
-            rendererPage.render(bitmap, null, null,
-                    PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
-            list.add(bitmap);
-            rendererPage.close();
-        }
-        pdfRenderer.close();
-        if(list.size() > 0){
-            PdfAdapter pdfAdapter = new PdfAdapter(list);
-            binding.pdfRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            binding.pdfRecyclerView.setAdapter(pdfAdapter);
+            int numberOfPage = pdfRenderer.getPageCount();
+            List<Bitmap> list = new ArrayList<>();
+
+            for(int i=0; i<numberOfPage; i++){
+                PdfRenderer.Page rendererPage = pdfRenderer.openPage(i);
+                Bitmap bitmap = Bitmap.createBitmap(
+                        metrics.widthPixels,
+                        metrics.heightPixels,
+                        Bitmap.Config.ARGB_8888);
+                rendererPage.render(bitmap, null, null,
+                        PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+                list.add(bitmap);
+                rendererPage.close();
+            }
+            pdfRenderer.close();
+            if(list.size() > 0){
+                PdfAdapter pdfAdapter = new PdfAdapter(list);
+                binding.pdfRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+                binding.pdfRecyclerView.setAdapter(pdfAdapter);
+            }
+
+        } catch (Exception e) {
+            e.getStackTrace();
         }
     }
 
@@ -144,7 +158,6 @@ public class PdfViewerActivity extends BaseActivity {
         AlertDialog alert = builder.create();
         builder.setNegativeButton("Ok", (dialog, which) -> alert.dismiss()).show();
 
-        sharedViewModel.getOnlineUserData(uploaderId);
 
         sharedViewModel.getUserData(uploaderId).observe(this, it->{
             try{

@@ -25,7 +25,6 @@ public class VerificationActivity extends AppCompatActivity {
         binding = ActivityVerificationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
-
         binding.userName.setText(preferenceManager.getString(Constants.KEY_EMAIL));
         setListeners();
     }
@@ -36,9 +35,7 @@ public class VerificationActivity extends AppCompatActivity {
             counter();
             sendVerificationEmail();
         });
-
         binding.iconLogout.setOnClickListener(v-> logOut());
-
     }
 
 

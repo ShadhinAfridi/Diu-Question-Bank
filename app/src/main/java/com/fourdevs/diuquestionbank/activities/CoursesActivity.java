@@ -19,6 +19,7 @@ import com.fourdevs.diuquestionbank.adapter.CourseDiff;
 import com.fourdevs.diuquestionbank.databinding.ActivityCoursesBinding;
 import com.fourdevs.diuquestionbank.listeners.CourseListener;
 import com.fourdevs.diuquestionbank.models.Course;
+import com.fourdevs.diuquestionbank.utilities.AsyncTasks;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.viewmodel.CourseViewModel;
 
@@ -42,16 +43,17 @@ public class CoursesActivity extends BaseActivity implements CourseListener {
         setAdapter();
     }
 
+
+
     private void setAdapter() {
-        binding.courseProgressBar.setVisibility(View.VISIBLE);
         courseAdapter = new CourseAdapter(new CourseDiff(),this,this);
         binding.courseRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         binding.courseRecyclerView.setAdapter(courseAdapter);
         courseViewModel.getCourse(departmentName, examName).observe(this, it->{
             courseAdapter.submitList(it);
-            binding.courseProgressBar.setVisibility(View.GONE);
-            if(it.size()>0) {
+            if(it.size()>=1) {
                 binding.nothingFound.setVisibility(View.GONE);
+                binding.courseProgressBar.setVisibility(View.GONE);
             } else {
                 binding.nothingFound.setVisibility(View.VISIBLE);
             }

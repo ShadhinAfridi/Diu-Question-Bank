@@ -31,8 +31,6 @@
             app:tint="@color/white"
             />
 
-
-
         <TextView
             android:id="@+id/titleHelp"
             android:layout_width="0dp"
@@ -45,7 +43,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            android:text="@string/help"
+            android:text="@string/feedback"
             app:layout_constraintBottom_toBottomOf="@id/iconBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iconBack"
@@ -70,6 +68,16 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:padding="@dimen/_5sdp"
         >
+
+        <TextView
+            android:id="@+id/feedbackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/feedback_text"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"
+            android:padding="@dimen/_5sdp"
+            />
 
         <EditText
             android:id="@+id/inputUserName"

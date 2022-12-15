@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
@@ -50,12 +51,9 @@ public class SignupActivity extends AppCompatActivity {
             email = Objects.requireNonNull(binding.inputUserEmail.getText()).toString().trim();
             password = Objects.requireNonNull(binding.inputUserPassword.getText()).toString().trim();
             confirmPassword = Objects.requireNonNull(binding.inputUserConfirmPassword.getText()).toString().trim();
-
             if (isValidSignUpDetails()) {
-                binding.buttonSignUp.setClickable(false);
                 loading(true);
                 signUp();
-                clearAll();
             }
         });
 
@@ -87,8 +85,8 @@ public class SignupActivity extends AppCompatActivity {
             if(!email.matches("[a-zA-Z0-9._-]+@+[a-zA-Z0-9._-]+diu.edu.bd")) {
                 binding.inputUserEmail.setError("DIU email address only!");
                 binding.inputUserEmail.requestFocus();
+                return false;
             }
-            return false;
         } else if (password.isEmpty()) {
             binding.inputUserPassword.setError("This field is required");
             binding.inputUserPassword.requestFocus();
@@ -140,9 +138,6 @@ public class SignupActivity extends AppCompatActivity {
         user.put(Constants.KEY_IS_ADMIN, false);
         user.put(Constants.KEY_PROFILE_PICTURE, null);
         user.put(Constants.KEY_IS_VERIFIED, false);
-        user.put(Constants.KEY_UPLOAD_COUNT, "0");
-        user.put(Constants.KEY_APPROVE_COUNT, "0");
-        user.put(Constants.KEY_REJECT_COUNT, "0");
 
         authViewModel.addSignUpToDb(user, userId)
                 .addOnSuccessListener(documentReference -> {
@@ -151,7 +146,6 @@ public class SignupActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(exception ->{
                     loading(false);
-                    makeToast(exception.getMessage());
                 });
         loading(false);
     }
@@ -210,10 +204,4 @@ public class SignupActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
     }
 
-    private void clearAll() {
-        binding.inputUserPassword.setText("");
-        binding.inputUserConfirmPassword.setText("");
-        binding.inputUserName.setText("");
-        binding.inputUserEmail.setText("");
-    }
 }
