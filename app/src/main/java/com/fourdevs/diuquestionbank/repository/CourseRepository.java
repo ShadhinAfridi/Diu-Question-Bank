@@ -89,8 +89,6 @@ public class CourseRepository {
                     course.userId = documentChange.getDocument().getString(Constants.KEY_USER_ID);
                     course.dateTime = getReadableDateTime(documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP));
                     course.approved = documentChange.getDocument().getBoolean(Constants.KEY_IS_APPROVED);
-
-                    Log.d("Afridi", course.courseId);
                     this.insert(course);
                     this.update(course);
                 }

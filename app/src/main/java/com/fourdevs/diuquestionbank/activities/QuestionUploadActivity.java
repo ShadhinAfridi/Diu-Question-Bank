@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.documentfile.provider.DocumentFile;
 
@@ -24,9 +23,6 @@ import com.fourdevs.diuquestionbank.databinding.ActivityQuestionUploadBinding;
 import com.fourdevs.diuquestionbank.databinding.ProgressBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -48,7 +44,6 @@ public class QuestionUploadActivity extends BaseActivity {
     private Dialog dialog;
     private PreferenceManager preferenceManager;
     private FirebaseFirestore database;
-    private DocumentReference documentReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +54,6 @@ public class QuestionUploadActivity extends BaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         progressBinding = ProgressBinding.inflate(getLayoutInflater());
         database = FirebaseFirestore.getInstance();
-        documentReference = database
-                .collection(Constants.KEY_COLLECTION_USERS).document(
-                        preferenceManager.getString(Constants.KEY_USER_ID)
-                );
         builder.setView(progressBinding.getRoot());
         dialog = builder.create();
         initializeSpinner();
@@ -94,7 +85,7 @@ public class QuestionUploadActivity extends BaseActivity {
             add_year = Integer.toString(i);
             date_list.add(add_year);
         }
-        ArrayAdapter<CharSequence> year_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, date_list);
+        ArrayAdapter<String> year_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, date_list);
         year_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.yearSpinner.setAdapter(year_adapter);
 
@@ -147,16 +138,12 @@ public class QuestionUploadActivity extends BaseActivity {
             double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
             progressBinding.message.setText("Complete "+(int)progress+"%");
 
-        }).addOnCompleteListener(new OnCompleteListener() {
-            @Override
-            public void onComplete(@NonNull Task task) {
-                if (task.isSuccessful()){
-                    String pdfUrl = filepath.getName();
-                    updateQuestionsDetails(pdfUrl);
-                    getUploadCount();
-                } else {
-                    makeToast("Failed!");
-                }
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                String pdfUrl = filepath.getName();
+                updateQuestionsDetails(pdfUrl);
+            } else {
+                makeToast("Failed!");
             }
         });
     }
@@ -207,19 +194,6 @@ public class QuestionUploadActivity extends BaseActivity {
                     makeToast("Successfully uploaded!");
                     preferenceManager.putBoolean(Constants.KEY_COUNT_ONCE, false);
                 }).addOnFailureListener(e -> makeToast(e.getMessage()));
-    }
-
-    private void getUploadCount() {
-        documentReference.get().addOnSuccessListener(documentSnapshot -> {
-            String uploadCount = documentSnapshot.getString(Constants.KEY_UPLOAD_COUNT);
-            assert uploadCount != null;
-            updateData(Integer.parseInt(uploadCount));
-        });
-    }
-
-    private void updateData(Integer count){
-        int value = count+1;
-        documentReference.update(Constants.KEY_UPLOAD_COUNT, value+"");
     }
 
     private Boolean checkPermissions(){

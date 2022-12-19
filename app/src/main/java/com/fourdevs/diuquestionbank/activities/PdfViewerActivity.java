@@ -1,7 +1,6 @@
 package com.fourdevs.diuquestionbank.activities;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.pdf.PdfRenderer;
 import android.os.Bundle;
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.fourdevs.diuquestionbank.adapter.PdfAdapter;
 import com.fourdevs.diuquestionbank.databinding.ActivityPdfViewerBinding;
 import com.fourdevs.diuquestionbank.databinding.DialougeUploaderInfoBinding;
+import com.fourdevs.diuquestionbank.models.Course;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.viewmodel.SharedViewModel;
 import com.google.firebase.storage.FirebaseStorage;
@@ -30,13 +30,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PdfViewerActivity extends BaseActivity {
-
     private ActivityPdfViewerBinding binding;
-    private String courseLink, uploadDate, uploaderId;
     private ParcelFileDescriptor fileDescriptor;
     private PdfRenderer pdfRenderer;
     private DisplayMetrics metrics;
     private SharedViewModel sharedViewModel;
+    private Course course;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +45,14 @@ public class PdfViewerActivity extends BaseActivity {
         sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
         metrics = getApplicationContext().getResources().getDisplayMetrics();
         loading(true);
-        Intent intent = getIntent();
-        String courseName = intent.getStringExtra(Constants.KEY_NAME);
-        courseLink = intent.getStringExtra(Constants.KEY_PDF_URL);
-        uploadDate = intent.getStringExtra(Constants.KEY_UPLOAD_DATE);
-        uploaderId = intent.getStringExtra(Constants.KEY_USER_ID);
-        binding.textCourseName.setText(courseName);
+        binding.textCourseName.setText(getIntentExtras());
         downloadActivity();
         setListener();
+    }
+
+    private String getIntentExtras() {
+        course = (Course) getIntent().getSerializableExtra(Constants.KEY_NAME);
+        return course.courseName+"_"+course.exam+"_"+course.semester+"_"+course.year;
     }
 
 
@@ -65,33 +64,38 @@ public class PdfViewerActivity extends BaseActivity {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private void downloadActivity(){
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.create();
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-        StorageReference islandRef = storageRef.child(courseLink);
-        File rootPath = new File(getBaseContext().getCacheDir().getPath()+"/Download");
-        if(!rootPath.exists()) {
-            rootPath.mkdirs();
-        }
-        final File localFile = new File(rootPath,courseLink);
-        if(localFile.exists()){
-            loading(false);
-            displayPdf(localFile);
-        } else {
-            islandRef.getFile(localFile).addOnProgressListener(snapshot -> {
-                double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
-                progressDialog.setMessage("Loading... " + ((int) progress) + "%");
-                progressDialog.show();
-            }).addOnSuccessListener(taskSnapshot -> {
+        try{
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.create();
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageRef = storage.getReference();
+            StorageReference islandRef = storageRef.child(course.fileUrl);
+            File rootPath = new File(getBaseContext().getCacheDir().getPath()+"/Download");
+            if(!rootPath.exists()) {
+                rootPath.mkdirs();
+            }
+            final File localFile = new File(rootPath,course.fileUrl);
+            if(localFile.exists()){
                 loading(false);
                 displayPdf(localFile);
-                progressDialog.dismiss();
-            }).addOnFailureListener(exception ->{
-                Log.getStackTraceString(exception);
-                makeToast("Cannot open this file");
-                progressDialog.dismiss();
-            } );
+            } else {
+                islandRef.getFile(localFile).addOnProgressListener(snapshot -> {
+                    double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+                    progressDialog.setMessage("Loading... " + ((int) progress) + "%");
+                    progressDialog.show();
+                }).addOnSuccessListener(taskSnapshot -> {
+                    loading(false);
+                    displayPdf(localFile);
+                    progressDialog.dismiss();
+                }).addOnFailureListener(exception ->{
+                    exception.getStackTrace();
+                    Toast.makeText(getApplicationContext(),"Cannot open this file",Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                } );
+            }
+
+        } catch (Exception e) {
+            e.getStackTrace();
         }
     }
 
@@ -146,9 +150,6 @@ public class PdfViewerActivity extends BaseActivity {
         }
     }
 
-    private void makeToast(String value) {
-        Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
-    }
 
     private void uploaderInfo() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -159,12 +160,12 @@ public class PdfViewerActivity extends BaseActivity {
         builder.setNegativeButton("Ok", (dialog, which) -> alert.dismiss()).show();
 
 
-        sharedViewModel.getUserData(uploaderId).observe(this, it->{
+        sharedViewModel.getUserData(course.userId).observe(this, it->{
             try{
                 viewBinding.uploaderName.setText(it.userName);
-                viewBinding.uploadDate.setText(uploadDate);
+                viewBinding.uploadDate.setText(course.dateTime);
             } catch (Exception e) {
-                sharedViewModel.getOnlineUserData(uploaderId);
+                sharedViewModel.getOnlineUserData(course.userId);
             }
         });
 
