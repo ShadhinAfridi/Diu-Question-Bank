@@ -5,20 +5,22 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.fourdevs.diuquestionbank.MyApplication;
 import com.fourdevs.diuquestionbank.authentication.LoginActivity;
 import com.fourdevs.diuquestionbank.databinding.ActivityMainBinding;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.utilities.PreferenceManager;
 import com.fourdevs.diuquestionbank.viewmodel.MainViewModel;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -29,12 +31,21 @@ public class MainActivity extends BaseActivity {
     private PreferenceManager preferenceManager;
     private static final int PERMISSION_REQUEST_CODE = 7;
     private MainViewModel viewModel;
+    private Application application;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setAds();
+        application = getApplication();
+        if (!(application instanceof MyApplication)) {
+            Log.e("Afridi", "Failed to cast application to MyApplication.");
+            return;
+        }
+        ((MyApplication) application).loadAd(this);
         preferenceManager = new PreferenceManager(getApplicationContext());
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         if(!preferenceManager.getBoolean(Constants.KEY_READ_ONCE)) {
@@ -45,9 +56,14 @@ public class MainActivity extends BaseActivity {
         if(!checkPermissions()) {
             askPermission();
         }
+
         setUserData();
         setListeners();
-        setAds();
+        showAds();
+    }
+
+    private void loadReport() {
+
     }
 
     private void setUserData() {
@@ -87,17 +103,14 @@ public class MainActivity extends BaseActivity {
         });
 
         binding.cardReward.setOnClickListener(view -> {
-            //Intent intent = new Intent(MainActivity.this, RewardActivity.class);
-            //startActivity(intent);
-            makeToast("Coming Soon....");
+            Intent intent = new Intent(MainActivity.this, RewardActivity.class);
+            startActivity(intent);
         });
         binding.cardHelp.setOnClickListener(view -> {
             Intent helpIntent = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(helpIntent);
         });
-        binding.cardNotice.setOnClickListener(view -> {
-            makeToast("Coming Soon....");
-        });
+        binding.cardNotice.setOnClickListener(view -> makeToast("Coming Soon...."));
     }
 
     private void logOut() {
@@ -139,16 +152,34 @@ public class MainActivity extends BaseActivity {
         binding.adView.loadAd(adRequest);
     }
 
+    private void showAds() {
+        binding.adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+        });
+
+        new CountDownTimer(8000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                Log.e("Afridi", ((MyApplication) application).isAdAvailable().toString());
+            }
+
+            @Override
+            public void onFinish() {
+                ((MyApplication) application)
+                        .showAdIfAvailable(
+                                MainActivity.this,
+                                () -> loadReport());
+            }
+        }.start();
+    }
+
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to exit?")
-                .setCancelable(false)
-                .setPositiveButton("Yes", (dialog, id) -> {
-                    MainActivity.this.finish();
-                    System.exit(0);
-                })
-                .setNegativeButton("No", (dialog, which) -> dialog.dismiss()).show();
+        super.onBackPressed();
+        moveTaskToBack(true);
     }
 
 }

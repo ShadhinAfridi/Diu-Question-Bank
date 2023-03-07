@@ -96,6 +96,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         >
 
+        <TextView
+            android:id="@+id/uploadMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/messages"
+            android:textColor="?android:attr/textColorPrimaryInverse"
+            android:textSize="@dimen/_13sdp"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:textStyle="bold"
+            />
+
         <View
             android:id="@+id/viewRound1"
             android:layout_width="100dp"
@@ -413,7 +428,7 @@
             android:layout_alignParentBottom="true"
             ads:adSize="MEDIUM_RECTANGLE"
             android:layout_gravity="center"
-            ads:adUnitId="ca-app-pub-2590640247128409/9051492038"/>
+            ads:adUnitId="ca-app-pub-2590640247128409/3772466697"/>
 
     </com.google.android.material.card.MaterialCardView>
 

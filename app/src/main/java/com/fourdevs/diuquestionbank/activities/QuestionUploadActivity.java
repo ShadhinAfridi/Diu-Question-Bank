@@ -4,9 +4,13 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,6 +19,8 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.documentfile.provider.DocumentFile;
 
@@ -58,6 +64,7 @@ public class QuestionUploadActivity extends BaseActivity {
         dialog = builder.create();
         initializeSpinner();
         setListeners();
+        notificationChannel();
     }
 
     private void setListeners() {
@@ -192,8 +199,12 @@ public class QuestionUploadActivity extends BaseActivity {
                     clearForm();
                     setDialog(false);
                     makeToast("Successfully uploaded!");
+                    createNotification("Done", "Your upload has been completed successfully.");
                     preferenceManager.putBoolean(Constants.KEY_COUNT_ONCE, false);
-                }).addOnFailureListener(e -> makeToast(e.getMessage()));
+                }).addOnFailureListener(e -> {
+                    makeToast(e.getMessage());
+                    createNotification("Failed!", "Your upload has failed.");
+                });
     }
 
     private Boolean checkPermissions(){
@@ -217,4 +228,38 @@ public class QuestionUploadActivity extends BaseActivity {
         if (show)dialog.show();
         else dialog.dismiss();
     }
+
+    private void notificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "question_upload",
+                    "Question Upload",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    private void createNotification(String title, String message) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "question_upload")
+                .setSmallIcon(R.drawable.ic_notifications)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setWhen(System.currentTimeMillis())
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+
+        Intent intent = new Intent(this, MainActivity.class);
+        @SuppressLint("UnspecifiedImmutableFlag")
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        builder.setContentIntent(pendingIntent);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(0, builder.build());
+    }
+
+
+
+
 }

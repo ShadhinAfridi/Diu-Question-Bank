@@ -1,12 +1,12 @@
 package com.fourdevs.diuquestionbank.activities;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.pdf.PdfRenderer;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,6 +20,8 @@ import com.fourdevs.diuquestionbank.databinding.DialougeUploaderInfoBinding;
 import com.fourdevs.diuquestionbank.models.Course;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.fourdevs.diuquestionbank.viewmodel.SharedViewModel;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -37,25 +39,31 @@ public class PdfViewerActivity extends BaseActivity {
     private SharedViewModel sharedViewModel;
     private Course course;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPdfViewerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setAds();
         sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
         metrics = getApplicationContext().getResources().getDisplayMetrics();
         loading(true);
-        binding.textCourseName.setText(getIntentExtras());
+        getIntentExtras();
         downloadActivity();
         setListener();
     }
 
-    private String getIntentExtras() {
-        course = (Course) getIntent().getSerializableExtra(Constants.KEY_NAME);
-        return course.courseName+"_"+course.exam+"_"+course.semester+"_"+course.year;
+    @SuppressLint("SetTextI18n")
+    private void getIntentExtras() {
+        try {
+            course = (Course) getIntent().getSerializableExtra(Constants.KEY_NAME);
+            binding.textCourseName.setText(course.courseName+"_"+course.exam+"_"+course.semester+"_"+course.year);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+
     }
-
-
 
     private void setListener() {
         binding.iconBack.setOnClickListener(view -> onBackPressed());
@@ -168,8 +176,11 @@ public class PdfViewerActivity extends BaseActivity {
                 sharedViewModel.getOnlineUserData(course.userId);
             }
         });
+    }
 
-
+    private void setAds() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
     }
 
 }

@@ -31,6 +31,9 @@ public interface QuestionsDao {
     @Query("SELECT * FROM "+ Constants.KEY_COLLECTION_QUESTIONS +" where departmentName = :department and exam = :exam and approved == 1 order by courseName")
     LiveData<List<Course>> getCourses(String department, String exam);
 
+    @Query("SELECT courseName FROM "+ Constants.KEY_COLLECTION_QUESTIONS +" where courseId= :id")
+    String getCourseId(String id);
+
     @Query("SELECT * FROM "+ Constants.KEY_COLLECTION_QUESTIONS+" where approved == 1 order by courseName")
     LiveData<List<Course>> getAllCourses();
 

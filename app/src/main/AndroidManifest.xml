@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.fourdevs.diuquestionbank">
+    package="com.fourdevs.diuquestionbank" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -17,17 +18,18 @@
         tools:node="remove" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated="true"
-        android:theme="@style/Theme.DIUQuestionBank">
+        android:theme="@style/Theme.DIUQuestionBank" >
         <activity
             android:name=".activities.ExamNameActivity"
-            android:screenOrientation="locked"
-            android:exported="false" />
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="locked" />
         <activity
             android:name=".authentication.VerificationActivity"
             android:exported="false"
@@ -39,6 +41,7 @@
         <activity
             android:name=".activities.RewardActivity"
             android:exported="false"
+            android:hardwareAccelerated="true"
             android:screenOrientation="locked" />
         <activity
             android:name=".activities.NoticeViewActivity"
@@ -63,6 +66,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:exported="false"
+            android:hardwareAccelerated="true"
             android:screenOrientation="locked" />
         <activity
             android:name=".authentication.LoginActivity"
@@ -75,6 +79,7 @@
         <activity
             android:name=".activities.PdfViewerActivity"
             android:exported="false"
+            android:hardwareAccelerated="true"
             android:screenOrientation="locked" />
         <activity
             android:name=".activities.DepartmentActivity"
@@ -91,9 +96,10 @@
         <activity
             android:name=".activities.WelcomeActivity"
             android:exported="true"
-            android:screenOrientation="locked">
+            android:screenOrientation="locked" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -104,7 +110,7 @@
 
         <service
             android:name=".utilities.NotificationReceiver"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

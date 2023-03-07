@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import com.fourdevs.diuquestionbank.models.Course;
 import com.fourdevs.diuquestionbank.room.AppDatabase;
 import com.fourdevs.diuquestionbank.room.QuestionsDao;
+import com.fourdevs.diuquestionbank.utilities.AsyncTasks;
 import com.fourdevs.diuquestionbank.utilities.Constants;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -24,7 +25,6 @@ public class CourseRepository {
 
     private final QuestionsDao questionsDao;
     private final LiveData<List<Course>> allCourses;
-
 
     public CourseRepository(Application application) {
         AppDatabase database = AppDatabase.getDatabase(application);
@@ -51,6 +51,10 @@ public class CourseRepository {
 
     public void update(Course course) {
         AppDatabase.databaseWriteExecutor.execute(() -> questionsDao.Update(course));
+    }
+
+    public String getCourseId(String id) {
+        return questionsDao.getCourseId(id);
     }
 
     public void networkCourse(String department, String exam) {
@@ -80,17 +84,29 @@ public class CourseRepository {
                 if (documentChange.getType() == DocumentChange.Type.ADDED) {
                     Course course = new Course();
                     course.courseId = documentChange.getDocument().getId();
-                    course.departmentName = documentChange.getDocument().getString(Constants.KEY_DEPARTMENT);
-                    course.courseName = documentChange.getDocument().getString(Constants.KEY_COURSE_CODE);
-                    course.semester = documentChange.getDocument().getString(Constants.KEY_SEMESTER);
-                    course.year = documentChange.getDocument().getString(Constants.KEY_YEAR);
-                    course.fileUrl = documentChange.getDocument().getString(Constants.KEY_PDF_URL);
-                    course.exam = documentChange.getDocument().getString(Constants.KEY_EXAM);
-                    course.userId = documentChange.getDocument().getString(Constants.KEY_USER_ID);
-                    course.dateTime = getReadableDateTime(documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP));
-                    course.approved = documentChange.getDocument().getBoolean(Constants.KEY_IS_APPROVED);
-                    this.insert(course);
-                    this.update(course);
+                    new AsyncTasks() {
+                        @Override
+                        public void doInBackground() {
+                            if(getCourseId(course.courseId)==null) {
+                                course.departmentName = documentChange.getDocument().getString(Constants.KEY_DEPARTMENT);
+                                course.courseName = documentChange.getDocument().getString(Constants.KEY_COURSE_CODE);
+                                course.semester = documentChange.getDocument().getString(Constants.KEY_SEMESTER);
+                                course.year = documentChange.getDocument().getString(Constants.KEY_YEAR);
+                                course.fileUrl = documentChange.getDocument().getString(Constants.KEY_PDF_URL);
+                                course.exam = documentChange.getDocument().getString(Constants.KEY_EXAM);
+                                course.userId = documentChange.getDocument().getString(Constants.KEY_USER_ID);
+                                course.dateTime = getReadableDateTime(documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP));
+                                course.approved = documentChange.getDocument().getBoolean(Constants.KEY_IS_APPROVED);
+                                insert(course);
+                            }
+                        }
+
+                        @Override
+                        public void onPostExecute() {
+
+                        }
+                    }.execute();
+
                 }
             }
         }

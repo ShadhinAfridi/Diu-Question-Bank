@@ -17,9 +17,6 @@ public class RewardViewModel extends AndroidViewModel {
         rewardRepository = new RewardRepository(application);
     }
 
-    public LiveData<InterstitialAd> getInterstitialAd() {
-        return rewardRepository.getInterstitialAd();
-    }
 
 
 }

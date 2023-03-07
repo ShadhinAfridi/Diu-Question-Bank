@@ -14,6 +14,13 @@
     <string name="upload">Upload</string>
     <string name="exam">Exam</string>
 
+    <string name="question_template">%1$d + %2$d = ?</string>
+    <string name="submit_button_label">Submit Answer</string>
+    <string name="incorrect_answer">Sorry, that\'s incorrect.</string>
+    <string name="results_dialog_title">Game Over</string>
+    <string name="results_dialog_message">You scored %1$d.</string>
+    <string name="results_dialog_button">Play Again</string>
+
     <string-array name="department_name">
         <item>Architecture</item>
         <item>Business Administration</item>
@@ -27,6 +34,7 @@
         <item>English</item>
         <item>Environmental Science and Disaster Management</item>
         <item>General Educational Development</item>
+        <item>Information and Communication Engineering</item>
         <item>Information Science and Library Management</item>
         <item>Information Technology and Management</item>
         <item>Innovation and Entrepreneurship</item>
@@ -47,68 +55,11 @@
         <item>Final</item>
     </string-array>
 
-    <string-array name="cse">
-        <item>ENG-101 Basic Functional English and English Spoken</item>
-        <item>MAT-101 Mathematics-I</item>
-        <item>PHY-101 Physics-I</item>
-        <item>CSE-112 Computer Fundamentals</item>
-        <item>CSE-113 Programming and Problem Solving</item>
-        <item>CSE-114 Programming and Problem Solving Lab</item>
-        <item>CSE-115 Introduction to Biology and Chemistry for Computation</item>
-        <item>ENG-102 Writing and Comprehension</item>
-        <item>MAT-102 Mathematics-II: Calculus, Complex Variables and Linear Algebra</item>
-        <item>PHY-102 Physics-II</item>
-        <item>PHY-103 Physics-II Lab</item>
-        <item>CSE-121 Electrical Circuits</item>
-        <item>CSE-122 Electrical Circuits Lab</item>
-        <item>CSE-123 Data Structure</item>
-        <item>CSE-124 Data Structure Lab</item>
-        <item>MAT-211 Engineering Mathematics</item>
-        <item>CSE-212 Discrete Mathematics</item>
-        <item>CSE-213 Algorithms</item>
-        <item>CSE-214 Algorithms Lab</item>
-        <item>CSE-215 Electronic Devices and Circuits</item>
-        <item>CSE-216 Electronic Devices and Circuits Lab</item>
-        <item>BNS-101 Bangladesh Studies</item>
-        <item>AOL-101 Art of Living</item>
-        <item>CSE-221 Object Oriented Programming</item>
-        <item>CSE-222 Object Oriented Programming Lab</item>
-        <item>CSE-223 Digital Logic Design</item>
-        <item>CSE-224 Digital Logic Design Lab</item>
-        <item>CSE-225 Data Communication</item>
-        <item>CSE-226 Numerical Methods</item>
-        <item>CSE-227 Systems Analysis and Design</item>
-        <item>CSE-228 Theory of Computation</item>
-        <item>CSE-311 Database Management System</item>
-        <item>CSE-312 Database Management System Lab</item>
-        <item>CSE-313 Compiler Design</item>
-        <item>CSE-314 Compiler Design Lab</item>
-        <item>CSE-315 Software Engineering</item>
-        <item>CSE-316 Artificial Intelligence</item>
-        <item>CSE-317 Microprocessor and Microcontrollers</item>
-        <item>STA-101 Statistics and Probability</item>
-        <item>CSE-321 Computer Networks</item>
-        <item>CSE-322 Computer Networks Lab</item>
-        <item>CSE-323 Operating Systems</item>
-        <item>CSE-324 Operating Systems Lab</item>
-        <item>CSE-325 Instrumentation and Control</item>
-        <item>CSE-326 Social and Professional Issues in Computing</item>
-        <item>ACT-327 Financial and Managerial Accounting</item>
-        <item>CSE-411 Computer Graphics</item>
-        <item>CSE-412 Computer Graphics Lab</item>
-        <item>CSE-413 Computer Architecture and Organization</item>
-        <item>ECO-426 Engineering Economics</item>
-        <item>CSE-446 Introduction to Bioinformatics</item>
-        <item>CSE-446 Information Security</item>
-        <item>CSE-426 Principles Of Robotics</item>
-    </string-array>
-
     <string name="privacy_policy">Privacy Policy</string>
     <string name="courses">Courses</string>
     <string name="ok">OK</string>
     <string name="nothing_n_found">Nothing \n Found</string>
     <string name="ops">Ops!</string>
-    <string name="help">Help</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="subject">Subject</string>
@@ -160,4 +111,6 @@
     <string name="feedback">Feedback</string>
     <string name="feedback_text">Please leave your suggestion and feedback for us to improve.</string>
     <string name="upload_pdf">Upload your question as a pdf file for your juniors.</string>
+    <string name="messages">Please contribute to the question bank by uploading your questions, and also share your suggestions for improving this app with us.</string>
+    <string name="reward_message">We are currently working on developing a new earning system that will benefit you.</string>
 </resources>
