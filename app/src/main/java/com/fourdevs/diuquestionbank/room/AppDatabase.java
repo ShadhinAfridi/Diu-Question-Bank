@@ -1,6 +1,7 @@
 package com.fourdevs.diuquestionbank.room;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -32,8 +33,10 @@ public abstract class AppDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    AppDatabase.class, Constants.KEY_DB)
+                    INSTANCE = Room
+                            .databaseBuilder(context.getApplicationContext(), AppDatabase.class, Constants.KEY_DB)
+                            .createFromAsset("databases/" + Constants.KEY_DB)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

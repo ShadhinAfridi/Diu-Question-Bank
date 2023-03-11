@@ -49,9 +49,21 @@ public class MainActivity extends BaseActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         if(!preferenceManager.getBoolean(Constants.KEY_READ_ONCE)) {
-            Task<QuerySnapshot> querySnapshotTask = viewModel.updateUserData();
-            querySnapshotTask.addOnSuccessListener(queryDocumentSnapshots -> setUserData())
-                    .addOnFailureListener(e -> Log.d("DIU Update Data", e.getMessage()));
+
+            viewModel.getUserData(preferenceManager.getString(Constants.KEY_USER_ID)).observe(this, it-> {
+                if(it!=null) {
+                    preferenceManager.putSting(Constants.KEY_USER_ID, it.userId);
+                    preferenceManager.putSting(Constants.KEY_NAME, it.userName);
+                    preferenceManager.putSting(Constants.KEY_PROFILE_PICTURE, it.profilePicture);
+                    preferenceManager.putBoolean(Constants.KEY_READ_ONCE, true);
+                    setUserData();
+                } else {
+                    Task<QuerySnapshot> querySnapshotTask = viewModel.updateUserData();
+                    querySnapshotTask.addOnSuccessListener(queryDocumentSnapshots -> setUserData())
+                            .addOnFailureListener(e -> Log.d("DIU Update Data", e.getMessage()));
+                }
+            });
+
         }
         if(!checkPermissions()) {
             askPermission();
@@ -102,10 +114,7 @@ public class MainActivity extends BaseActivity {
             startActivity(profileIntent);
         });
 
-        binding.cardReward.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, RewardActivity.class);
-            startActivity(intent);
-        });
+        binding.cardReward.setOnClickListener(view -> makeToast("Coming Soon...."));
         binding.cardHelp.setOnClickListener(view -> {
             Intent helpIntent = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(helpIntent);
